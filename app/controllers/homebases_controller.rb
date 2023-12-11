@@ -1,0 +1,2 @@
+class HomebasesController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class DefenseBuiltsController < ApplicationController
+end
