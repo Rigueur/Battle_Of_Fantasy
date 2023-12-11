@@ -1,0 +1,2 @@
+class ArchersController < ApplicationController
+end
