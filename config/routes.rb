@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :homebases, only: [:show]
 
+  resources :users, only: [:show, :edit, :update, :create]
+
   get "homebases/:id" => "homebases#show", as: :homebase
   patch "homebases/:id" => "homebases#update", as: :homebase_update
 
