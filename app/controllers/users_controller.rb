@@ -9,10 +9,10 @@ class UsersController < ApplicationController
     devise_parameter_sanitizer.permit(:account_update, keys: [:username, :nickname])
   end
 
-  # def show
-  #   @user = User.find_by(user_id: current_user.id)
-  #   #@homebases = @user.homebases
-  # end
+  def show
+    @user = User.find_by(user_id: current_user.id)
+    @towns = @user.towns
+  end
 
 
 end
