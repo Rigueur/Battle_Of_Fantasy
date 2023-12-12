@@ -4,8 +4,8 @@ class CreateMessages < ActiveRecord::Migration[7.1]
       t.text :content
       t.time :send_time
       t.boolean :read
-      t.references :sender_id, null: false,  foreign_key: { to_table: :users }
-      t.references :receiver_id, null: false,  foreign_key: { to_table: :users }
+      t.references :sender, null: false,  foreign_key: { to_table: :users }
+      t.references :receiver, null: false,  foreign_key: { to_table: :users }
 
       t.timestamps
     end

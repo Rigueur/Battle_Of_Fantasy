@@ -1,3 +1,2 @@
-class Mage < ApplicationRecord
-  belongs_to :homebase
+class Mage < Unit
 end

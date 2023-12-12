@@ -1,3 +1,2 @@
-class Horseman < ApplicationRecord
-  belongs_to :homebase
+class Horseman < Unit
 end
