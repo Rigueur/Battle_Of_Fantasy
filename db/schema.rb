@@ -15,9 +15,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
   enable_extension "plpgsql"
 
   create_table "archers", force: :cascade do |t|
-    t.bigint "homebase_id", null: false
+    t.bigint "town_id", null: false
     t.text "name"
     t.text "image_url"
+    t.text "role"
     t.integer "level"
     t.integer "hp"
     t.text "armor_type"
@@ -34,7 +35,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
     t.boolean "enrolled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["homebase_id"], name: "index_archers_on_homebase_id"
+    t.index ["town_id"], name: "index_archers_on_town_id"
   end
 
   create_table "battles", force: :cascade do |t|
@@ -49,12 +50,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
   end
 
   create_table "defense_builts", force: :cascade do |t|
-    t.bigint "homebase_id", null: false
+    t.bigint "town_id", null: false
     t.bigint "defense_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["defense_id"], name: "index_defense_builts_on_defense_id"
-    t.index ["homebase_id"], name: "index_defense_builts_on_homebase_id"
+    t.index ["town_id"], name: "index_defense_builts_on_town_id"
   end
 
   create_table "defenses", force: :cascade do |t|
@@ -70,30 +71,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "homebases", force: :cascade do |t|
-    t.text "name"
-    t.text "coordinates"
-    t.text "image_url"
-    t.integer "wood_quantity"
-    t.integer "stone_quantity"
-    t.integer "gold_quantity"
-    t.integer "food_quantity"
-    t.boolean "research_ongoing"
-    t.time "research_end_time"
-    t.boolean "construction_ongoing"
-    t.time "construction_end_time"
-    t.boolean "defense_ongoing"
-    t.time "defense_end_time"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_homebases_on_user_id"
-  end
-
   create_table "horsemen", force: :cascade do |t|
-    t.bigint "homebase_id", null: false
+    t.bigint "town_id", null: false
     t.text "name"
     t.text "image_url"
+    t.text "role"
     t.integer "level"
     t.integer "hp"
     t.text "armor_type"
@@ -110,13 +92,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
     t.boolean "enrolled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["homebase_id"], name: "index_horsemen_on_homebase_id"
+    t.index ["town_id"], name: "index_horsemen_on_town_id"
   end
 
   create_table "mages", force: :cascade do |t|
-    t.bigint "homebase_id", null: false
+    t.bigint "town_id", null: false
     t.text "name"
     t.text "image_url"
+    t.text "role"
     t.integer "level"
     t.integer "hp"
     t.text "armor_type"
@@ -133,7 +116,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
     t.boolean "enrolled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["homebase_id"], name: "index_mages_on_homebase_id"
+    t.index ["town_id"], name: "index_mages_on_town_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -149,12 +132,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
   end
 
   create_table "research_levels", force: :cascade do |t|
-    t.bigint "homebase_id", null: false
+    t.bigint "town_id", null: false
     t.bigint "research_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["homebase_id"], name: "index_research_levels_on_homebase_id"
     t.index ["research_id"], name: "index_research_levels_on_research_id"
+    t.index ["town_id"], name: "index_research_levels_on_town_id"
   end
 
   create_table "researches", force: :cascade do |t|
@@ -171,9 +154,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
   end
 
   create_table "soldiers", force: :cascade do |t|
-    t.bigint "homebase_id", null: false
+    t.bigint "town_id", null: false
     t.text "name"
     t.text "image_url"
+    t.text "role"
     t.integer "level"
     t.integer "hp"
     t.text "armor_type"
@@ -190,16 +174,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
     t.boolean "enrolled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["homebase_id"], name: "index_soldiers_on_homebase_id"
+    t.index ["town_id"], name: "index_soldiers_on_town_id"
   end
 
   create_table "structure_builts", force: :cascade do |t|
-    t.bigint "homebase_id", null: false
+    t.bigint "town_id", null: false
     t.bigint "structure_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["homebase_id"], name: "index_structure_builts_on_homebase_id"
     t.index ["structure_id"], name: "index_structure_builts_on_structure_id"
+    t.index ["town_id"], name: "index_structure_builts_on_town_id"
   end
 
   create_table "structures", force: :cascade do |t|
@@ -218,10 +202,31 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "towns", force: :cascade do |t|
+    t.text "name"
+    t.text "coordinates"
+    t.text "image_url"
+    t.integer "wood_quantity"
+    t.integer "stone_quantity"
+    t.integer "gold_quantity"
+    t.integer "food_quantity"
+    t.boolean "research_ongoing"
+    t.time "research_end_time"
+    t.boolean "construction_ongoing"
+    t.time "construction_end_time"
+    t.boolean "defense_ongoing"
+    t.time "defense_end_time"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_towns_on_user_id"
+  end
+
   create_table "units", force: :cascade do |t|
-    t.bigint "homebase_id", null: false
+    t.bigint "town_id", null: false
     t.text "name"
     t.text "image_url"
+    t.text "role"
     t.integer "level"
     t.integer "hp"
     t.text "armor_type"
@@ -238,7 +243,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
     t.boolean "enrolled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["homebase_id"], name: "index_units_on_homebase_id"
+    t.index ["town_id"], name: "index_units_on_town_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -260,9 +265,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
   end
 
   create_table "wizards", force: :cascade do |t|
-    t.bigint "homebase_id", null: false
+    t.bigint "town_id", null: false
     t.text "name"
     t.text "image_url"
+    t.text "role"
     t.integer "level"
     t.integer "hp"
     t.text "armor_type"
@@ -279,24 +285,24 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
     t.boolean "enrolled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["homebase_id"], name: "index_wizards_on_homebase_id"
+    t.index ["town_id"], name: "index_wizards_on_town_id"
   end
 
-  add_foreign_key "archers", "homebases", column: "homebase_id"
+  add_foreign_key "archers", "towns"
   add_foreign_key "battles", "users", column: "attacking_base_id"
   add_foreign_key "battles", "users", column: "defending_base_id"
   add_foreign_key "defense_builts", "defenses"
-  add_foreign_key "defense_builts", "homebases", column: "homebase_id"
-  add_foreign_key "homebases", "users"
-  add_foreign_key "horsemen", "homebases", column: "homebase_id"
-  add_foreign_key "mages", "homebases", column: "homebase_id"
+  add_foreign_key "defense_builts", "towns"
+  add_foreign_key "horsemen", "towns"
+  add_foreign_key "mages", "towns"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
-  add_foreign_key "research_levels", "homebases", column: "homebase_id"
   add_foreign_key "research_levels", "researches"
-  add_foreign_key "soldiers", "homebases", column: "homebase_id"
-  add_foreign_key "structure_builts", "homebases", column: "homebase_id"
+  add_foreign_key "research_levels", "towns"
+  add_foreign_key "soldiers", "towns"
   add_foreign_key "structure_builts", "structures"
-  add_foreign_key "units", "homebases", column: "homebase_id"
-  add_foreign_key "wizards", "homebases", column: "homebase_id"
+  add_foreign_key "structure_builts", "towns"
+  add_foreign_key "towns", "users"
+  add_foreign_key "units", "towns"
+  add_foreign_key "wizards", "towns"
 end

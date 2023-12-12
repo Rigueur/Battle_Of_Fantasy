@@ -1,4 +1,4 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 <%= link_to "Log in", new_user_session_path %>
-<%= link_to "HomeBase", "#" %>
+<%= link_to "Town",  current_user ? current_user.towns[0] : "#" %>

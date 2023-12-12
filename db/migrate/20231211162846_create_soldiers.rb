@@ -1,9 +1,10 @@
 class CreateSoldiers < ActiveRecord::Migration[7.1]
   def change
     create_table :soldiers do |t|
-      t.references :homebase, null: false, foreign_key: true
+      t.references :town, null: false, foreign_key: true
       t.text :name
       t.text :image_url
+      t.text :role
       t.integer :level
       t.integer :hp
       t.text :armor_type

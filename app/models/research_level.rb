@@ -1,4 +1,4 @@
 class ResearchLevel < ApplicationRecord
-  belongs_to :homebase
+  belongs_to :town
   belongs_to :research
 end

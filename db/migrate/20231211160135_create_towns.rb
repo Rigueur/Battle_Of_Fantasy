@@ -1,6 +1,6 @@
-class CreateHomebases < ActiveRecord::Migration[7.1]
+class CreateTowns < ActiveRecord::Migration[7.1]
   def change
-    create_table :homebases do |t|
+    create_table :towns do |t|
       t.text :name
       t.text :coordinates
       t.text :image_url

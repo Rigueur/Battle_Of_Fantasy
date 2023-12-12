@@ -1,4 +1,4 @@
-<% @homebase.researches.each do |research| %>
+<% @town.researches.each do |research| %>
   <%= research.name + " Lv. " + research.level.to_s %>
   <%= link_to "Upgrade", "#" %>
 <% end %>
