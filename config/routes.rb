@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :units, only: [:index, :update, :create]
   end
 
+  resources :users, only: [:show]
+
   get "towns/:towns_id/structures" => "structure_builts#index", as: :towns_structures
   patch "towns/:towns_id/structures/:id" => "structure_builts#update", as: :towns_structure_update
 

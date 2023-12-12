@@ -8,4 +8,11 @@ class UsersController < ApplicationController
     # For additional in app/views/devise/registrations/edit.html.erb
     devise_parameter_sanitizer.permit(:account_update, keys: [:username, :nickname])
   end
+
+  def show
+    @user = User.find_by(user_id: current_user.id)
+    @towns = @user.towns
+  end
+
+
 end
