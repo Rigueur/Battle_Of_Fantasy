@@ -1,0 +1,5 @@
+<% @homebase.defenses.each do |defense| %>
+  <%= defense.name + " Lv. " + defense.level.to_s %>
+  <%= link_to "Upgrade", "#" %>
+<% end %>
+<br>
