@@ -1,4 +1,5 @@
 class Homebase < ApplicationRecord
+
   belongs_to :user
   has_many :battles_as_attacking_base, class_name: 'Battle',
   foreign_key: :attacking_base_id
