@@ -1,0 +1,13 @@
+<% Unit.roles.each do |role| %>
+  <h2><%= role.pluralize.capitalize %> (Qty : <%= instance_variable_get("@#{role.pluralize}").size %>)</h2>
+  <p><%= link_to "Recruit", "#" %></p> <%# create %>
+<% end %>
+
+SAVE :
+<% Unit.roles.each do |role| %>
+  <% instance_variable_get("@#{role.pluralize}").each do |unit| %>
+    <p><%= unit.name %></p>
+    <p>Level : <%= unit.level %></p>
+    <p><%= link_to "Upgrade", "#" %></p>
+  <% end %>
+<% end %>

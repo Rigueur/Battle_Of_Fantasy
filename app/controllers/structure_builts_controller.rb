@@ -1,13 +1,13 @@
 class StructureBuiltsController < ApplicationController
   def index
-    @homebase = Homebase.find(params[:homebases_id])
-    @structure_builts = StructureBuilt.all.where(homebase_id: params[:homebases_id])
+    @town = Town.find(params[:towns_id])
+    @structure_builts = StructureBuilt.all.where(town_id: params[:towns_id])
   end
 
   def update
     @structure_built = StructureBuilt.find(params[:id])
     @structure_built.update(structure_built_params)
-    redirect_to homebases_structures_path
+    redirect_to towns_structures_path
   end
 
   private
