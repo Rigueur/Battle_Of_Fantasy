@@ -3,6 +3,7 @@ class CreateHomebases < ActiveRecord::Migration[7.1]
     create_table :homebases do |t|
       t.text :name
       t.text :coordinates
+      t.text :image_url
       t.integer :wood_quantity
       t.integer :stone_quantity
       t.integer :gold_quantity

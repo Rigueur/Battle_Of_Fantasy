@@ -1,3 +1,2 @@
-class Archer < ApplicationRecord
-  belongs_to :homebase
+class Archer < Unit
 end

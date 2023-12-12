@@ -1,3 +1,2 @@
-class Soldier < ApplicationRecord
-  belongs_to :homebase
+class Soldier < Unit
 end

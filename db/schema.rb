@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163700) do
   create_table "archers", force: :cascade do |t|
     t.bigint "homebase_id", null: false
     t.text "name"
+    t.text "image_url"
     t.integer "level"
     t.integer "hp"
     t.text "armor_type"
@@ -39,12 +40,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163700) do
   create_table "battles", force: :cascade do |t|
     t.integer "energy_cost"
     t.text "result"
-    t.bigint "attacking_base_id_id", null: false
-    t.bigint "defending_base_id_id", null: false
+    t.bigint "attacking_base_id", null: false
+    t.bigint "defending_base_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["attacking_base_id_id"], name: "index_battles_on_attacking_base_id_id"
-    t.index ["defending_base_id_id"], name: "index_battles_on_defending_base_id_id"
+    t.index ["attacking_base_id"], name: "index_battles_on_attacking_base_id"
+    t.index ["defending_base_id"], name: "index_battles_on_defending_base_id"
   end
 
   create_table "defense_builts", force: :cascade do |t|
@@ -72,6 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163700) do
   create_table "homebases", force: :cascade do |t|
     t.text "name"
     t.text "coordinates"
+    t.text "image_url"
     t.integer "wood_quantity"
     t.integer "stone_quantity"
     t.integer "gold_quantity"
@@ -91,6 +93,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163700) do
   create_table "horsemen", force: :cascade do |t|
     t.bigint "homebase_id", null: false
     t.text "name"
+    t.text "image_url"
     t.integer "level"
     t.integer "hp"
     t.text "armor_type"
@@ -113,6 +116,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163700) do
   create_table "mages", force: :cascade do |t|
     t.bigint "homebase_id", null: false
     t.text "name"
+    t.text "image_url"
     t.integer "level"
     t.integer "hp"
     t.text "armor_type"
@@ -136,12 +140,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163700) do
     t.text "content"
     t.time "send_time"
     t.boolean "read"
-    t.bigint "sender_id_id", null: false
-    t.bigint "receiver_id_id", null: false
+    t.bigint "sender_id", null: false
+    t.bigint "receiver_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["receiver_id_id"], name: "index_messages_on_receiver_id_id"
-    t.index ["sender_id_id"], name: "index_messages_on_sender_id_id"
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "research_levels", force: :cascade do |t|
@@ -169,6 +173,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163700) do
   create_table "soldiers", force: :cascade do |t|
     t.bigint "homebase_id", null: false
     t.text "name"
+    t.text "image_url"
     t.integer "level"
     t.integer "hp"
     t.text "armor_type"
@@ -216,6 +221,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163700) do
   create_table "units", force: :cascade do |t|
     t.bigint "homebase_id", null: false
     t.text "name"
+    t.text "image_url"
     t.integer "level"
     t.integer "hp"
     t.text "armor_type"
@@ -250,6 +256,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163700) do
   create_table "wizards", force: :cascade do |t|
     t.bigint "homebase_id", null: false
     t.text "name"
+    t.text "image_url"
     t.integer "level"
     t.integer "hp"
     t.text "armor_type"
@@ -270,15 +277,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_163700) do
   end
 
   add_foreign_key "archers", "homebases", column: "homebase_id"
-  add_foreign_key "battles", "users", column: "attacking_base_id_id"
-  add_foreign_key "battles", "users", column: "defending_base_id_id"
+  add_foreign_key "battles", "users", column: "attacking_base_id"
+  add_foreign_key "battles", "users", column: "defending_base_id"
   add_foreign_key "defense_builts", "defenses"
   add_foreign_key "defense_builts", "homebases", column: "homebase_id"
   add_foreign_key "homebases", "users"
   add_foreign_key "horsemen", "homebases", column: "homebase_id"
   add_foreign_key "mages", "homebases", column: "homebase_id"
-  add_foreign_key "messages", "users", column: "receiver_id_id"
-  add_foreign_key "messages", "users", column: "sender_id_id"
+  add_foreign_key "messages", "users", column: "receiver_id"
+  add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "research_levels", "homebases", column: "homebase_id"
   add_foreign_key "research_levels", "researches"
   add_foreign_key "soldiers", "homebases", column: "homebase_id"

@@ -1,3 +1,2 @@
-class Wizard < ApplicationRecord
-  belongs_to :homebase
+class Wizard < Unit
 end
