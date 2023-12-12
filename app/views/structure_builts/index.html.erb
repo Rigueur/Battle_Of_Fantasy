@@ -1,4 +1,4 @@
-<% @homebase.structures.each do |structure| %>
+<% @town.structures.each do |structure| %>
   <%= structure.name + " Lv. " + structure.level.to_s %>
   <%= link_to "Upgrade", "#" %>
 <% end %>

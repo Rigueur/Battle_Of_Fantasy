@@ -1,7 +1,7 @@
 class DefenseBuiltsController < ApplicationController
   def index
-    @homebase = Homebase.find(params[:homebases_id])
-    @defense_builts = DefenseBuilt.all.where(homebase_id: params[:homebases_id])
+    @town = Town.find(params[:towns_id])
+    @defense_builts = DefenseBuilt.all.where(town_id: params[:towns_id])
   end
 
   def update
