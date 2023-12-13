@@ -10,8 +10,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(user_id: current_user.id)
-    @towns = @user.towns
+    @user = User.find_by(username: params[:users_username])
+    @towns = @user.towns if @user
   end
 
 

@@ -10,4 +10,5 @@ class User < ApplicationRecord
   has_many :messages_as_receiver, class_name: 'Message',
   foreign_key: :receiver_id
   validates :username, :nickname, :level, :experience, :energy, presence: true
+  validates :username, uniqueness: true
 end
