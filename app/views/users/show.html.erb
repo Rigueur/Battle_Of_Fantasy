@@ -1,10 +1,10 @@
-<%# <%= @user.name %>
-<li><%= @user.username %></li>
-<li><%= @user.email %></li>
-<li><%= @user.avatar_url%></li>
-<li><%= @user.nickname %></li>
-<li><%= @user.level %></li>
-<li><%= @user.experience %></li>
-<li><%= @user.energy %></li>
-
-<li><%= link_to 'Edit', "#path to edit" %></li>
+<% if @user %>
+  <li>Username : <%= @user.username %></li>
+  <li>Email : <%= @user.email %></li>
+  <li>Avatar : <%= @user.avatar_url%></li>
+  <li>Nickname : <%= @user.nickname %></li>
+  <li>Level : <%= @user.level %></li>
+  <li>Experience : <%= @user.experience %></li>
+  <li>Energy : <%= @user.energy %></li>
+<% end %>
+<li><%= link_to 'Edit', "#path to edit" if @user = current_user %></li>
