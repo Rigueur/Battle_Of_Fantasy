@@ -8,17 +8,20 @@ Rails.application.routes.draw do
 
 
   resources :towns, only: [:show, :update] do
+    post 'end_construction', on: :member
+    post 'end_research', on: :member
+    post 'end_defense', on: :member
     resources :units, only: [:index, :update, :create]
   end
 
   get "users/:users_username/profile" => "users#show", as: :user_profile
 
-  get "towns/:towns_id/structures" => "structure_builts#index", as: :towns_structures
-  patch "towns/:towns_id/structures/:id" => "structure_builts#update", as: :towns_structure_update
+  get "towns/:town_id/structures" => "structure_builts#index", as: :towns_structures
+  patch "towns/:town_id/structures/:id" => "structure_builts#update", as: :towns_structure_update
 
-  get "towns/:towns_id/researches" => "research_levels#index", as: :towns_researches
-  patch "towns/:towns_id/researches/:id" => "research_levels#update", as: :towns_research_update
+  get "towns/:town_id/researches" => "research_levels#index", as: :towns_researches
+  patch "towns/:town_id/researches/:id" => "research_levels#update", as: :towns_research_update
 
-  get "towns/:towns_id/defenses" => "defense_builts#index", as: :towns_defenses
-  patch "towns/:towns_id/defenses/:id" => "defense_builts#update", as: :towns_defense_update
+  get "towns/:town_id/defenses" => "defense_builts#index", as: :towns_defenses
+  patch "towns/:town_id/defenses/:id" => "defense_builts#update", as: :towns_defense_update
 end

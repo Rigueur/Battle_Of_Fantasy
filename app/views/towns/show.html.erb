@@ -6,11 +6,41 @@
 <li>Stone Quantity: <%= @town.stone_quantity %></li>
 <li>Gold Quantity: <%= @town.gold_quantity %></li>
 <li>Food Quantity: <%= @town.food_quantity %></li>
-<li>Research Ongoing: <%= @town.research_ongoing %></li>
 <li>Construction Ongoing: <%= @town.construction_ongoing %></li>
+<% if @town.construction_ongoing %>
+  <li>Structures Being Constructed:</li>
+  <ul>
+    <% latest_structure = @town.structure_builts.order(updated_at: :desc).first.structure %>
+    <% if latest_structure %>
+      <li><%= latest_structure.name %> Lv <%= latest_structure.level + 1%></li>
+      <div data-controller="countdownstructure" data-countdownstructure-end-time-value="<%= @town.construction_end_time.to_i %>" data-countdownstructure-town-id-value="<%= @town.id %>" data-countdownstructure-target="countdownstructure"></div>
+    <% end %>
+  </ul>
+<% end %>
+<li>Research Ongoing: <%= @town.research_ongoing %></li>
+<% if @town.research_ongoing %>
+  <li>Researches Being Researched:</li>
+  <ul>
+    <% latest_research = @town.research_levels.order(updated_at: :desc).first.research %>
+    <% if latest_research %>
+      <li><%= latest_research.name %> Lv <%= latest_research.level + 1%></li>
+      <div data-controller="countdownresearch" data-countdownresearch-end-time-value="<%= @town.research_end_time.to_i %>" data-countdownresearch-town-id-value="<%= @town.id %>" data-countdownresearch-target="countdownresearch"></div>
+    <% end %>
+  </ul>
+  <% end %>
 <li>Defense Ongoing: <%= @town.defense_ongoing %></li>
+<% if @town.defense_ongoing %>
+  <li>Defenses Being Researched:</li>
+  <ul>
+    <% latest_defense = @town.defense_builts.order(updated_at: :desc).first.defense %>
+    <% if latest_defense %>
+      <li><%= latest_defense.name %> Lv <%= latest_defense.level + 1%></li>
+      <div data-controller="countdowndefense" data-countdowndefense-end-time-value="<%= @town.defense_end_time.to_i %>" data-countdowndefense-town-id-value="<%= @town.id %>" data-countdowndefense-target="countdowndefense"></div>
+    <% end %>
+  </ul>
+  <% end %>
 </ul>
 
-<%= link_to 'Structures', "#path pour structures" %>
-<%= link_to 'Armies', "#path pour armies" %>
-<%= link_to 'Defenses', "#path pour defenses" %>
+<%= link_to 'Structures', towns_structures_path(@town) %>
+<%= link_to 'Researches', towns_researches_path(@town)  %>
+<%= link_to 'Defenses', towns_defenses_path(@town)  %>

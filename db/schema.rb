@@ -121,7 +121,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
 
   create_table "messages", force: :cascade do |t|
     t.text "content"
-    t.time "send_time"
+    t.datetime "send_time"
     t.boolean "read"
     t.bigint "sender_id", null: false
     t.bigint "receiver_id", null: false
@@ -211,11 +211,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_100706) do
     t.integer "gold_quantity"
     t.integer "food_quantity"
     t.boolean "research_ongoing"
-    t.time "research_end_time"
+    t.datetime "research_end_time"
     t.boolean "construction_ongoing"
-    t.time "construction_end_time"
+    t.datetime "construction_end_time"
     t.boolean "defense_ongoing"
-    t.time "defense_end_time"
+    t.datetime "defense_end_time"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
