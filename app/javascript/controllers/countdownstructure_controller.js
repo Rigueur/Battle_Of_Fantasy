@@ -21,7 +21,7 @@ export default class extends Controller {
 
     if (timeRemaining < 0) {
       clearInterval(this.intervalId);
-      this.countdownstructureTarget.textContent = 'Construction complete!';
+      this.countdownstructureTarget.textContent = 'Done!';
       fetch('/towns/' + this.townIdValue + '/end_construction', {
         method: 'POST',
         headers: {
@@ -30,6 +30,7 @@ export default class extends Controller {
           'Accept': 'application/json'
         }
       });
+      console.log("Construction finished!");
     } else {
       var seconds = Math.floor((timeRemaining / 1000) % 60);
       var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);

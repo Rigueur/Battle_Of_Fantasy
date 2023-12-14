@@ -39,7 +39,6 @@ export default class extends Controller {
     } else {
       const energyProduced = Math.floor(energyMinutesPassed / 3);
       this.updateEnergy(energyProduced);
-      console.log(energyProduced);
     }
   }
 
@@ -59,6 +58,7 @@ export default class extends Controller {
     if (response.ok) {
       const newFooterHtml = await response.text();
       document.querySelector('footer').innerHTML = newFooterHtml;
+      console.log('Resources updated!');
     } else {
       console.error('Error updating resources:', response.statusText);
     }
@@ -75,5 +75,13 @@ export default class extends Controller {
       },
       body: JSON.stringify({ energy })
     });
+
+    if (response.ok) {
+      const newFooterHtml = await response.text();
+      document.querySelector('footer').innerHTML = newFooterHtml;
+      console.log('Energy updated!');
+    } else {
+      console.error('Error updating energy:', response.statusText);
+    }
   }
 }
