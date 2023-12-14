@@ -1,1 +1,22 @@
-This is the footer
+<footer >
+<div>
+  This is the footer
+  <div >
+  Energy: <%= current_user.energy if current_user%>
+  </div>
+<% if @town %>
+  <div data-controller="resources" data-resources-town-id-value="<%= @town.id %>"
+  data-resources-energy-update-value="<%= current_user.energy_updated_at.to_i %>"
+  data-resources-wood-production-value="<%= @town.structures.pluck(:wood_production).compact.sum %>"
+  data-resources-stone-production-value="<%= @town.structures.pluck(:stone_production).compact.sum %>"
+  data-resources-food-production-value="<%= @town.structures.pluck(:food_production).compact.sum %>"
+  data-resources-gold-production-value="<%= @town.structures.pluck(:gold_production).compact.sum %>"
+  data-resources-last-update-time-value="<%= @town.resources_updated_at.to_i %>">
+    Wood: <%= @town.wood_quantity %>
+    Stone: <%= @town.stone_quantity %>
+    Food: <%= @town.food_quantity %>
+    Gold: <%= @town.gold_quantity %>
+  </div>
+<% end %>
+</div>
+</footer>

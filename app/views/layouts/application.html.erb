@@ -12,7 +12,7 @@
 
   <body>
     <%= yield %>
-    <%= render "shared/footer" %>
+    <%= render "shared/footer" unless @hidefooter %>
     <%= render "shared/flashes" %>
   </body>
 </html>

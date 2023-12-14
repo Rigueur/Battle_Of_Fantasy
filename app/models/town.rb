@@ -18,4 +18,10 @@ class Town < ApplicationRecord
   has_many :horsemen
   validates :name, :coordinates, :wood_quantity, :stone_quantity, :gold_quantity, :food_quantity, presence: true
   validates :research_ongoing, :construction_ongoing, :defense_ongoing, inclusion: [true, false]
+
+  after_create :set_resources_updated_at
+
+  def set_resources_updated_at
+    self.update(resources_updated_at: 0.minutes.from_now)
+  end
 end
