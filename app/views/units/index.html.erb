@@ -1,0 +1,21 @@
+<% Unit.roles.each do |role| %>
+  <h2><%= role.pluralize.capitalize %> (Qty : <%= instance_variable_get("@#{role.pluralize}").size %>)</h2>
+    <%= simple_form_for([@town, @unit]) do |t|  %>
+
+      <%= t.hidden_field :role, value: role %>
+
+      <%= t.label :qty %>
+      <%= t.number_field :qty %>
+
+      <%= t.submit "Recruit" %>
+      <% end %>
+<% end %>
+
+SAVE :
+<% Unit.roles.each do |role| %>
+  <% instance_variable_get("@#{role.pluralize}").each do |unit| %>
+    <p><%= unit.name %></p>
+    <p>Level : <%= unit.level %></p>
+    <p><%= link_to "Upgrade", "#" %></p>
+  <% end %>
+<% end %>

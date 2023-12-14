@@ -1,5 +1,23 @@
-<% @homebase.researches.each do |research| %>
-  <%= research.name + " Lv. " + research.level.to_s %>
-  <%= link_to "Upgrade", "#" %>
-<% end %>
+<% research = @town.researches.find_by(name: "Forge") %>
+<%= research.name + " Lv. " + research.level.to_s %>
+<% research_built = ResearchLevel.find_by(research_id: research.id, town_id: @town.id) %>
+<%= link_to "Upgrade", towns_research_update_path(@town.id, research_built.id), data: {turbo_method: :patch} %>
+<br>
+<% research = @town.researches.find_by(name: "Barracks") %>
+<%= research.name + " Lv. " + research.level.to_s %>
+<% research_built = ResearchLevel.find_by(research_id: research.id, town_id: @town.id) %>
+<%= link_to "Upgrade", towns_research_update_path(@town.id, research_built.id), data: {turbo_method: :patch} %>
+<br>
+<% research = @town.researches.find_by(name: "Magic Institut") %>
+<%= research.name + " Lv. " + research.level.to_s %>
+<% research_built = ResearchLevel.find_by(research_id: research.id, town_id: @town.id) %>
+<%= link_to "Upgrade", towns_research_update_path(@town.id, research_built.id), data: {turbo_method: :patch} %>
+<br>
+<% research = @town.researches.find_by(name: "Monster Stable") %>
+<%= research.name + " Lv. " + research.level.to_s %>
+<% research_built = ResearchLevel.find_by(research_id: research.id, town_id: @town.id) %>
+<%= link_to "Upgrade", towns_research_update_path(@town.id, research_built.id), data: {turbo_method: :patch} %>
+<br>
+
+<%= link_to "Back", town_path(@town) %>
 <br>

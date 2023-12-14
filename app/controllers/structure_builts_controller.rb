@@ -1,18 +1,17 @@
 class StructureBuiltsController < ApplicationController
   def index
-    @homebase = Homebase.find(params[:homebases_id])
-    @structure_builts = StructureBuilt.all.where(homebase_id: params[:homebases_id])
+    @town = Town.find(params[:town_id])
+    @structure_builts = StructureBuilt.all.where(town_id: params[:town_id])
   end
 
   def update
     @structure_built = StructureBuilt.find(params[:id])
-    @structure_built.update(structure_built_params)
-    redirect_to homebases_structures_path
-  end
-
-  private
-
-  def structure_built_params
-    params.require(:structure_built).permit(:structure_id)
+    @town = Town.find(params[:town_id])
+    unless @town.construction_ongoing || @town.wood_quantity < @structure_built.structure.wood_cost || @town.stone_quantity < @structure_built.structure.stone_cost || @town.gold_quantity < @structure_built.structure.gold_cost
+      @town.update(construction_ongoing: true, construction_end_time: @structure_built.structure.upgrade_time.to_i.minutes.from_now)
+      @town.update(wood_quantity: @town.wood_quantity - @structure_built.structure.wood_cost, stone_quantity: @town.stone_quantity - @structure_built.structure.stone_cost, gold_quantity: @town.gold_quantity - @structure_built.structure.gold_cost)
+      @structure_built.update(updated_at: Time.now)
+      redirect_to towns_structures_path
+    end
   end
 end

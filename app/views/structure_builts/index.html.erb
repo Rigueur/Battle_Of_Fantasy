@@ -1,5 +1,23 @@
-<% @homebase.structures.each do |structure| %>
-  <%= structure.name + " Lv. " + structure.level.to_s %>
-  <%= link_to "Upgrade", "#" %>
-<% end %>
+<% structure = @town.structures.find_by(name: "Fields") %>
+<%= structure.name + " Lv. " + structure.level.to_s %>
+<% structure_built = StructureBuilt.find_by(structure_id: structure.id, town_id: @town.id) %>
+<%= link_to "Upgrade", towns_structure_update_path(@town.id, structure_built.id), data: {turbo_method: :patch} %>
+<br>
+<% structure = @town.structures.find_by(name: "Sawmill") %>
+<%= structure.name + " Lv. " + structure.level.to_s %>
+<% structure_built = StructureBuilt.find_by(structure_id: structure.id, town_id: @town.id) %>
+<%= link_to "Upgrade", towns_structure_update_path(@town.id, structure_built.id), data: {turbo_method: :patch} %>
+<br>
+<% structure = @town.structures.find_by(name: "Mine") %>
+<%= structure.name + " Lv. " + structure.level.to_s %>
+<% structure_built = StructureBuilt.find_by(structure_id: structure.id, town_id: @town.id) %>
+<%= link_to "Upgrade", towns_structure_update_path(@town.id, structure_built.id), data: {turbo_method: :patch} %>
+<br>
+<% structure = @town.structures.find_by(name: "Market") %>
+<%= structure.name + " Lv. " + structure.level.to_s %>
+<% structure_built = StructureBuilt.find_by(structure_id: structure.id, town_id: @town.id) %>
+<%= link_to "Upgrade", towns_structure_update_path(@town.id, structure_built.id), data: {turbo_method: :patch} %>
+<br>
+
+<%= link_to "Back", town_path(@town) %>
 <br>

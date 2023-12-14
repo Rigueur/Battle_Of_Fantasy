@@ -1,5 +1,23 @@
-<% @homebase.defenses.each do |defense| %>
-  <%= defense.name + " Lv. " + defense.level.to_s %>
-  <%= link_to "Upgrade", "#" %>
-<% end %>
+<% defense = @town.defenses.find_by(name: "Walls") %>
+<%= defense.name + " Lv. " + defense.level.to_s %>
+<% defense_built = DefenseBuilt.find_by(defense_id: defense.id, town_id: @town.id) %>
+<%= link_to "Upgrade", towns_defense_update_path(@town.id, defense_built.id), data: {turbo_method: :patch} %>
+<br>
+<% defense = @town.defenses.find_by(name: "Towers") %>
+<%= defense.name + " Lv. " + defense.level.to_s %>
+<% defense_built = DefenseBuilt.find_by(defense_id: defense.id, town_id: @town.id) %>
+<%= link_to "Upgrade", towns_defense_update_path(@town.id, defense_built.id), data: {turbo_method: :patch} %>
+<br>
+<% defense = @town.defenses.find_by(name: "Traps") %>
+<%= defense.name + " Lv. " + defense.level.to_s %>
+<% defense_built = DefenseBuilt.find_by(defense_id: defense.id, town_id: @town.id) %>
+<%= link_to "Upgrade", towns_defense_update_path(@town.id, defense_built.id), data: {turbo_method: :patch} %>
+<br>
+<% defense = @town.defenses.find_by(name: "Moat") %>
+<%= defense.name + " Lv. " + defense.level.to_s %>
+<% defense_built = DefenseBuilt.find_by(defense_id: defense.id, town_id: @town.id) %>
+<%= link_to "Upgrade", towns_defense_update_path(@town.id, defense_built.id), data: {turbo_method: :patch} %>
+<br>
+
+<%= link_to "Back", town_path(@town) %>
 <br>
