@@ -10,8 +10,8 @@ class CreateStructures < ActiveRecord::Migration[7.1]
       t.text :upgrade_time
       t.integer :wood_production
       t.integer :stone_production
-      t.string :gold_production
-      t.string :food_production
+      t.integer :gold_production
+      t.integer :food_production
 
       t.timestamps
     end

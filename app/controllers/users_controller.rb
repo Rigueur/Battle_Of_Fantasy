@@ -14,5 +14,4 @@ class UsersController < ApplicationController
     @towns = @user.towns if @user
   end
 
-
 end

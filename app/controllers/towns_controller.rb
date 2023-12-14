@@ -43,6 +43,33 @@ class TownsController < ApplicationController
     end
   end
 
+  def update_resources
+    @town = Town.find(params[:id])
+    if @town.update(
+        wood_quantity: @town.wood_quantity + params[:wood].to_i,
+        stone_quantity: @town.stone_quantity + params[:stone].to_i,
+        food_quantity: @town.food_quantity + params[:food].to_i,
+        gold_quantity: @town.gold_quantity + params[:gold].to_i,
+        resources_updated_at: 0.minutes.from_now
+      )
+      render partial: 'shared/footer', locals: { town: @town }
+    else
+      render json: @town.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update_energy
+    @user = current_user
+    if @user.update(
+      energy: current_user.energy + params[:energy].to_i,
+      energy_updated_at: 0.minutes.from_now
+    )
+      render partial: 'shared/footer', locals: { town: @town }
+    else
+      render json: current_user.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def upgrade_structure

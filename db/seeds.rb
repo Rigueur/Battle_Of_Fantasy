@@ -58,10 +58,10 @@ Town.new(user_id: User.first.id, name: "test", coordinates: "1,1", image_url: "t
 Town.new(user_id: User.last.id, name: "Town Testing", coordinates: "1,1", wood_quantity: 100, stone_quantity: 100, gold_quantity: 100, food_quantity: 100, research_ongoing: false, construction_ongoing: false, defense_ongoing: false).save!
 
 puts "Creating structure builts..."
-StructureBuilt.new(structure_id: Structure.find_by(name: "Fields", level: 0).id, town_id: Town.first.id).save!
-StructureBuilt.new(structure_id: Structure.find_by(name: "Sawmill", level: 0).id, town_id: Town.first.id).save!
-StructureBuilt.new(structure_id: Structure.find_by(name: "Mine", level: 0).id, town_id: Town.first.id).save!
-StructureBuilt.new(structure_id: Structure.find_by(name: "Market", level: 0).id, town_id: Town.first.id).save!
+StructureBuilt.new(structure_id: Structure.find_by(name: "Fields", level: 1).id, town_id: Town.first.id).save!
+StructureBuilt.new(structure_id: Structure.find_by(name: "Sawmill", level: 1).id, town_id: Town.first.id).save!
+StructureBuilt.new(structure_id: Structure.find_by(name: "Mine", level: 1).id, town_id: Town.first.id).save!
+StructureBuilt.new(structure_id: Structure.find_by(name: "Market", level: 1).id, town_id: Town.first.id).save!
 
 puts "Creating research levels..."
 ResearchLevel.new(research_id: Research.find_by(name: "Forge", level: 0).id, town_id: Town.first.id).save!

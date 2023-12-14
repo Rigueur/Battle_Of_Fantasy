@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     post 'end_construction', on: :member
     post 'end_research', on: :member
     post 'end_defense', on: :member
+    patch :update_resources, on: :member
+    patch :update_energy, on: :member
     resources :units, only: [:index, :update, :create]
   end
 
