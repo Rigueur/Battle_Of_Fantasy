@@ -9,10 +9,17 @@ $font-family-sans-serif: $body-font;
 $headings-font-family:   $headers-font;
 $body-bg:                $light-gray;
 $font-size-base:         1rem;
+$container-max-widths: (
+  sm: 98vw,
+  md: 98vw,
+  lg: 98vw,
+  xl: 98vw,
+  xxl: 98vw
+);
 
 // Colors
 $body-color: $gray;
-$primary:    $blue;
+$primary:    $beige;
 $success:    $green;
 $info:       $yellow;
 $danger:     $red;
