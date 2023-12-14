@@ -21,7 +21,7 @@ export default class extends Controller {
 
     if (timeRemaining < 0) {
       clearInterval(this.intervalId);
-      this.countdownresearchTarget.textContent = 'Research complete!';
+      this.countdownresearchTarget.textContent = 'Done!';
       fetch('/towns/' + this.townIdValue + '/end_research', {
         method: 'POST',
         headers: {
@@ -30,6 +30,7 @@ export default class extends Controller {
           'Accept': 'application/json'
         }
       });
+      console.log("Research upgraded!");
     } else {
       var seconds = Math.floor((timeRemaining / 1000) % 60);
       var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
