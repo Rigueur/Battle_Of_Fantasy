@@ -18,7 +18,7 @@ class UnitsController < ApplicationController
 
     case @role
     when "archer"
-      if town.gold_quantity >= unit.gold_recruit_cost && town.food_quantity >= unit.food_recruit_cost && current_user.energy >= unit.energy_recruit_cost
+      if town.gold_quantity >= unit.gold_recruit_cost * @quantity && town.food_quantity >= unit.food_recruit_cost * @quantity && current_user.energy >= unit.energy_recruit_cost * @quantity
         @quantity.times do
           unit = Archer.create(name: "archer", level: 1, hp: 100, armor_type: "light", attack: 10, attack_type: "physical", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false, town_id: params[:town_id])
           town.gold_quantity -= unit.gold_recruit_cost
@@ -31,7 +31,7 @@ class UnitsController < ApplicationController
       end
 
     when "mage"
-      if town.gold_quantity >= unit.gold_recruit_cost && town.food_quantity >= unit.food_recruit_cost && current_user.energy >= unit.energy_recruit_cost
+      if town.gold_quantity >= unit.gold_recruit_cost * @quantity && town.food_quantity >= unit.food_recruit_cost * @quantity && current_user.energy >= unit.energy_recruit_cost * @quantity
         @quantity.times do
           unit = Mage.create(name: "mages", level: 1, hp: 100, armor_type: "light", attack: 10, attack_type: "magic", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false, town_id: params[:town_id])
           town.gold_quantity -= unit.gold_recruit_cost
@@ -44,7 +44,7 @@ class UnitsController < ApplicationController
       end
 
     when "soldier"
-      if town.gold_quantity >= unit.gold_recruit_cost && town.food_quantity >= unit.food_recruit_cost && current_user.energy >= unit.energy_recruit_cost
+      if town.gold_quantity >= unit.gold_recruit_cost * @quantity && town.food_quantity >= unit.food_recruit_cost * @quantity && current_user.energy >= unit.energy_recruit_cost * @quantity
         @quantity.times do
           unit = Soldier.new(name: "soldier", level: 1, hp: 100, armor_type: "medium", attack: 10, attack_type: "physical", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false, town_id: params[:town_id])
           town.gold_quantity -= unit.gold_recruit_cost
@@ -57,7 +57,7 @@ class UnitsController < ApplicationController
       end
 
     when "horseman"
-      if town.gold_quantity >= unit.gold_recruit_cost && town.food_quantity >= unit.food_recruit_cost && current_user.energy >= unit.energy_recruit_cost
+      if town.gold_quantity >= unit.gold_recruit_cost * @quantity && town.food_quantity >= unit.food_recruit_cost * @quantity && current_user.energy >= unit.energy_recruit_cost * @quantity
         @quantity.times do
           unit = Horseman.new(name: "horseman", level: 1, hp: 100, armor_type: "medium", attack: 10, attack_type: "physical", speed: 10, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false, town_id: params[:town_id])
           town.gold_quantity -= unit.gold_recruit_cost
