@@ -64,7 +64,7 @@ class TownsController < ApplicationController
       energy: current_user.energy + params[:energy].to_i,
       energy_updated_at: 0.minutes.from_now
     )
-      render partial: 'shared/footer', locals: { town: @town }
+      # render partial: 'shared/footer', locals: { town: @town }
     else
       render json: current_user.errors, status: :unprocessable_entity
     end

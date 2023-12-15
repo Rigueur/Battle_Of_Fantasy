@@ -21,7 +21,7 @@ Town.destroy_all
 User.destroy_all
 
 puts "Creating users..."
-User.new(username: "Rigueur", password: "123456", email: "rigueur@exemple.com", nickname: "Rigueur", level: 5, experience: 50, energy:20).save!
+User.new(username: "Rigueur", password: "123456", email: "rigueur@exemple.com", nickname: "Rigueur", level: 5, experience: 50, energy:80).save!
 User.new(username: "Naomi", email: "naomi@exemple.com", nickname: "naomi", level: 3, experience: 15, energy: 35,  password: "pipicaca").save!
 
 puts "Creating structures..."
@@ -54,8 +54,8 @@ index = 0
 
 
 puts "Creating towns..."
-Town.new(user_id: User.first.id, name: "test", coordinates: "1,1", image_url: "test", wood_quantity: 500, stone_quantity: 500, gold_quantity: 500, food_quantity: 500, research_ongoing: false, construction_ongoing: false, defense_ongoing: false).save!
-Town.new(user_id: User.last.id, name: "Town Testing", coordinates: "1,1", wood_quantity: 100, stone_quantity: 100, gold_quantity: 100, food_quantity: 100, research_ongoing: false, construction_ongoing: false, defense_ongoing: false).save!
+Town.new(user_id: User.first.id, name: "Agrabah", coordinates: "1,1", image_url: "test", wood_quantity: 500, stone_quantity: 500, gold_quantity: 500, food_quantity: 500, research_ongoing: false, construction_ongoing: false, defense_ongoing: false).save!
+Town.new(user_id: User.last.id, name: "Far Far Away", coordinates: "1,1", wood_quantity: 100, stone_quantity: 100, gold_quantity: 100, food_quantity: 100, research_ongoing: false, construction_ongoing: false, defense_ongoing: false).save!
 
 puts "Creating structure builts..."
 StructureBuilt.new(structure_id: Structure.find_by(name: "Fields", level: 1).id, town_id: Town.first.id).save!
@@ -77,7 +77,16 @@ DefenseBuilt.new(defense_id: Defense.find_by(name: "Magic Barrier", level: 0).id
 
 puts "Creating archers..."
 Archer.new(name: "Archer", town_id:Town.last.id, level: 1, hp: 10, armor_type: "light", attack: 5, attack_type: "physical", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false).save!
-Archer.new(name: "Archer 2", town_id:Town.first.id, level: 1, hp: 10, armor_type: "light", attack: 5, attack_type: "physical", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false).save!
+Archer.new(name: "Archer", town_id:Town.first.id, level: 1, hp: 10, armor_type: "light", attack: 5, attack_type: "physical", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false).save!
 
-puts "Creatings mages..."
-Mage.new(name: "Mage", town_id:Town.last.id, level: 1, hp: 10, armor_type: "light", attack: 5, attack_type: "magic", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false).save!
+puts "Creating mages..."
+Mage.new(name: "Mage", town_id:Town.last.id, level: 1, hp: 10, armor_type: "light", attack: 5, attack_type: "magical", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false).save!
+
+puts "Creating horsemen..."
+Horseman.new(name: "Horseman", town_id:Town.last.id, level: 1, hp: 10, armor_type: "medium", attack: 5, attack_type: "physical", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false).save!
+
+puts "Creating soldiers..."
+Soldier.new(name: "Soldier", town_id:Town.last.id, level: 1, hp: 10, armor_type: "medium", attack: 5, attack_type: "physical", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false).save!
+
+puts "Creating wizards..."
+Wizard.new(name: "Wizard", town_id:Town.last.id, level: 1, hp: 10, armor_type: "light", attack: 5, attack_type: "magical", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false).save!

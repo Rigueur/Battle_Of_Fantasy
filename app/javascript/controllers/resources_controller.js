@@ -77,8 +77,8 @@ export default class extends Controller {
     });
 
     if (response.ok) {
-      const newFooterHtml = await response.text();
-      document.querySelector('footer').innerHTML = newFooterHtml;
+      // const newFooterHtml = await response.text();
+      // document.querySelector('footer').innerHTML = newFooterHtml;
       console.log('Energy updated!');
     } else {
       console.error('Error updating energy:', response.statusText);

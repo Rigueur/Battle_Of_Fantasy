@@ -9,80 +9,120 @@ class UnitsController < ApplicationController
   end
 
   def create
-    created = false
     @role = params[:unit][:role]
     @quantity = params[:unit][:qty].to_i
     @quantity = 1 if @quantity <= 0
     town = Town.find(params[:town_id])
-    unit = Unit.new(gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5)
+    unit = Unit.new(unit_stats(@role, 1))
 
-    case @role
-    when "archer"
-      if town.gold_quantity >= unit.gold_recruit_cost * @quantity && town.food_quantity >= unit.food_recruit_cost * @quantity && current_user.energy >= unit.energy_recruit_cost * @quantity
-        @quantity.times do
-          unit = Archer.create(name: "archer", level: 1, hp: 100, armor_type: "light", attack: 10, attack_type: "physical", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false, town_id: params[:town_id])
-          town.gold_quantity -= unit.gold_recruit_cost
-          town.food_quantity -= unit.food_recruit_cost
-          current_user.energy -= unit.energy_recruit_cost
-        end
-        flash[:notice] = "Unit created" if unit.save && town.save && current_user.save
-      else
-        flash[:alert] = "Not enough resources to recruit this unit"
+    if town.gold_quantity >= (unit.gold_recruit_cost * @quantity) && town.food_quantity >= (unit.food_recruit_cost * @quantity) && current_user.energy >= (unit.energy_recruit_cost * @quantity)
+      @quantity.times do
+        unit = @role.capitalize.constantize.new(unit_stats(@role, 1))
+        unit.town_id = town.id
+        unit.save!
       end
-
-    when "mage"
-      if town.gold_quantity >= unit.gold_recruit_cost * @quantity && town.food_quantity >= unit.food_recruit_cost * @quantity && current_user.energy >= unit.energy_recruit_cost * @quantity
-        @quantity.times do
-          unit = Mage.create(name: "mages", level: 1, hp: 100, armor_type: "light", attack: 10, attack_type: "magic", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false, town_id: params[:town_id])
-          town.gold_quantity -= unit.gold_recruit_cost
-          town.food_quantity -= unit.food_recruit_cost
-          current_user.energy -= unit.energy_recruit_cost
-        end
-        flash[:notice] = "Unit created" if unit.save && town.save && current_user.save
-      else
-        flash[:alert] = "Not enough resources to recruit this unit"
-      end
-
-    when "soldier"
-      if town.gold_quantity >= unit.gold_recruit_cost * @quantity && town.food_quantity >= unit.food_recruit_cost * @quantity && current_user.energy >= unit.energy_recruit_cost * @quantity
-        @quantity.times do
-          unit = Soldier.new(name: "soldier", level: 1, hp: 100, armor_type: "medium", attack: 10, attack_type: "physical", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false, town_id: params[:town_id])
-          town.gold_quantity -= unit.gold_recruit_cost
-          town.food_quantity -= unit.food_recruit_cost
-          current_user.energy -= unit.energy_recruit_cost
-        end
-        flash[:notice] = "Unit created" if unit.save && town.save && current_user.save
-      else
-        flash[:alert] = "Not enough resources to recruit this unit"
-      end
-
-    when "horseman"
-      if town.gold_quantity >= unit.gold_recruit_cost * @quantity && town.food_quantity >= unit.food_recruit_cost * @quantity && current_user.energy >= unit.energy_recruit_cost * @quantity
-        @quantity.times do
-          unit = Horseman.new(name: "horseman", level: 1, hp: 100, armor_type: "medium", attack: 10, attack_type: "physical", speed: 10, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false, town_id: params[:town_id])
-          town.gold_quantity -= unit.gold_recruit_cost
-          town.food_quantity -= unit.food_recruit_cost
-          current_user.energy -= unit.energy_recruit_cost
-        end
-        flash[:notice] = "Unit created" if unit.save && town.save && current_user.save
-      else
-        flash[:alert] = "Not enough resources to recruit this unit"
-      end
-    end
-
-    if created
-      flash[:notice] = "Unit created"
+      town.gold_quantity -= @quantity * unit.gold_recruit_cost
+      town.food_quantity -= @quantity * unit.food_recruit_cost
+      current_user.energy -= @quantity * unit.energy_recruit_cost
+      flash[:notice] = "Unit created" if unit.save && town.save && current_user.save
+    else
+      flash[:alert] = "Not enough resources to recruit this unit"
     end
 
     # refresh the page
     redirect_to request.referrer
-
 end
 
   private
 
-  def unit_params
-    params.require(:unit).permit(:name, :level)
+  def unit_stats(role, level)
+    case role
+    when "archer"
+    unit_stats = {
+      name: "archer",
+      level: level,
+      hp: 90 + 10 * level,
+      armor_type: "light",
+      attack: 10 + 2 * level,
+      attack_type: "physical",
+      speed: 8 + 2 * level,
+      stealth: 8 + 2 * level,
+      gold_recruit_cost: 5 * level,
+      food_recruit_cost: 5 * level,
+      energy_recruit_cost: 1 * level,
+      gold_train_cost: 5 * level,
+      food_train_cost: 5 * level,
+      energy_train_cost: 1 * level,
+    }
+    when "mage"
+    unit_stats = {
+      name: "mage",
+      level: level,
+      hp: 70 + 10 * level,
+      armor_type: "light",
+      attack: 10 + 2 * level,
+      attack_type: "magical",
+      speed: 5 + 1 * level,
+      stealth: 5 + 1 * level,
+      gold_recruit_cost: 5 * level,
+      food_recruit_cost: 5 * level,
+      energy_recruit_cost: 1 * level,
+      gold_train_cost: 5 * level,
+      food_train_cost: 5 * level,
+      energy_train_cost: 1 * level,
+    }
+    when "soldier"
+    unit_stats = {
+      name: "soldier",
+      level: level,
+      hp: 100 + 10 * level,
+      armor_type: "medium",
+      attack: 10 + 2 * level,
+      attack_type: "physical",
+      speed: 5 + 1 * level,
+      stealth: 5 + 1 * level,
+      gold_recruit_cost: 5 * level,
+      food_recruit_cost: 5 * level,
+      energy_recruit_cost: 1 * level,
+      gold_train_cost: 5 * level,
+      food_train_cost: 5 * level,
+      energy_train_cost: 1 * level,
+    }
+    when "horseman"
+    unit_stats = {
+      name: "horseman",
+      level: level,
+      hp: 80 + 10 * level,
+      armor_type: "medium",
+      attack: 10 + 2 * level,
+      attack_type: "physical",
+      speed: 10 + 2 * level,
+      stealth: 10 + 2 * level,
+      gold_recruit_cost: 5 * level,
+      food_recruit_cost: 5 * level,
+      energy_recruit_cost: 1 * level,
+      gold_train_cost: 5 * level,
+      food_train_cost: 5 * level,
+      energy_train_cost: 1 * level,
+    }
+  when "wizard"
+    unit_stats = {
+      name: "wizard",
+      level: level,
+      hp: 60 + 10 * level,
+      armor_type: "light",
+      attack: 10 + 2 * level,
+      attack_type: "magical",
+      speed: 5 + 1 * level,
+      stealth: 5 + 1 * level,
+      gold_recruit_cost: 5 * level,
+      food_recruit_cost: 5 * level,
+      energy_recruit_cost: 1 * level,
+      gold_train_cost: 5 * level,
+      food_train_cost: 5 * level,
+      energy_train_cost: 1 * level,
+    }
+    end
   end
 
   # We are defining the archer, mage, soldier... methods wich works as an index of a specific role (archer, mage, soldier...)
