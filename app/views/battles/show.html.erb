@@ -1,0 +1,13 @@
+<!-- FILEPATH: /home/steven/code/Rigueur/Battle_Of_Fantasy/app/views/battles/battle_result.html.erb -->
+
+<h1>Battle Result</h1>
+
+<p>Attacking Town: <%= @battle.attacking_town.name %></p>
+<p>Attacking User: <%= @battle.attacking_town.user.nickname %></p>
+
+<p>Defending Town: <%= @battle.defending_town.name %></p>
+<p>Defending User: <%= @battle.defending_town.user.nickname %></p>
+
+<p>Energy Cost: <%= @battle.energy_cost %></p>
+
+<p>Result: <%= @battle.result %></p>

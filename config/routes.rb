@@ -7,18 +7,26 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
 
 
-  resources :homebases, only: [:show]
+  resources :towns, only: [:show, :update] do
+    post 'end_construction', on: :member
+    post 'end_research', on: :member
+    post 'end_defense', on: :member
+    patch :update_resources, on: :member
+    patch :update_energy, on: :member
+    resources :units, only: [:index, :update, :create]
+    resources :battles, only: [:new, :create]
+  end
 
-  get "homebases/:id" => "homebases#show", as: :homebase
-  patch "homebases/:id" => "homebases#update", as: :homebase_update
+  get "users/:users_username/profile" => "users#show", as: :user_profile
 
-  get "homebases/:homebases_id/structures" => "structure_builts#index", as: :homebases_structures
-  patch "homebases/:homebases_id/structures/:id" => "structure_builts#update", as: :homebases_structure_update
+  get "towns/:town_id/structures" => "structure_builts#index", as: :towns_structures
+  patch "towns/:town_id/structures/:id" => "structure_builts#update", as: :towns_structure_update
 
-  get "homebases/:homebases_id/researches" => "research_levels#index", as: :homebases_researches
-  patch "homebases/:homebases_id/researches/:id" => "research_levels#update", as: :homebases_research_update
+  get "towns/:town_id/researches" => "research_levels#index", as: :towns_researches
+  patch "towns/:town_id/researches/:id" => "research_levels#update", as: :towns_research_update
 
-  get "homebases/:homebases_id/defenses" => "defense_builts#index", as: :homebases_defenses
-  patch "homebases/:homebases_id/defenses/:id" => "defense_builts#update", as: :homebases_defense_update
+  get "towns/:town_id/defenses" => "defense_builts#index", as: :towns_defenses
+  patch "towns/:town_id/defenses/:id" => "defense_builts#update", as: :towns_defense_update
 
+  resources :battles, only: [:show]
 end

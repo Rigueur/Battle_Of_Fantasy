@@ -1,5 +1,2 @@
 class Archer < Unit
-
-
-
 end

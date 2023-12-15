@@ -9,8 +9,6 @@ export default class extends Controller {
   }
 
   display(event) {
-    event.preventDefault();
-
     if (this.iconTarget.contains(event.target)) {
       this.menuTarget.classList.add('opacity')
       this.iconTarget.classList.add('background-opacity')
@@ -20,8 +18,6 @@ export default class extends Controller {
   }
 
   remove(event) {
-    event.preventDefault();
-
     if (this.iconTarget.contains(event.target) || this.menuTarget.contains(event.target)) return ;
 
     this.menuTarget.classList.remove('opacity');

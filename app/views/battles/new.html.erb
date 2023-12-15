@@ -1,0 +1,10 @@
+<%= form_with(url: town_battles_path, method: :post) do %>
+  <% Town.all.each do |town| %>
+    <% next if town.user == current_user %>
+    <%= town.name %>
+    <%= town.user.nickname %>
+    <%= radio_button_tag "battle[defending_town_id]", town.id %>
+    <br>
+  <% end %>
+  <%= submit_tag "Start Battle" %>
+<% end %>
