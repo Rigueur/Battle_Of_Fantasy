@@ -74,9 +74,11 @@
         <img src="<%= image_path ('units-icon') %>" alt="">
       </div>
     <% end %>
-    <div class="battle-icon">
-      <img src="<%= image_path ('battle-icon') %>" alt="">
-    </div>
+    <%= link_to new_town_battle_path(@town), class: "text-decoration-non" do %>
+      <div class="battle-icon">
+        <img src="<%= image_path ('battle-icon') %>" alt="">
+      </div>
+    <% end %>
   </div>
 
 

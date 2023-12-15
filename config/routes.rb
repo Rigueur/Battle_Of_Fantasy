@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     patch :update_resources, on: :member
     patch :update_energy, on: :member
     resources :units, only: [:index, :update, :create]
+    resources :battles, only: [:new, :create]
   end
 
   get "users/:users_username/profile" => "users#show", as: :user_profile
@@ -26,4 +27,6 @@ Rails.application.routes.draw do
 
   get "towns/:town_id/defenses" => "defense_builts#index", as: :towns_defenses
   patch "towns/:town_id/defenses/:id" => "defense_builts#update", as: :towns_defense_update
+
+  resources :battles, only: [:show]
 end
