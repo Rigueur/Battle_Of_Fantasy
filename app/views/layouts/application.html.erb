@@ -11,8 +11,10 @@
   </head>
 
   <body  style="height: 100vh; width: 100vw; overflow: hidden; background-image: url('<%= image_path ('desert-base-1')%>'); background-size: cover;">
-    <%= yield %>
-    <%#= render "shared/footer" %>
-    <%= render "shared/flashes" %>
+    <div class="page-container" style="width: 100vw; height:100vh; position: relative;">
+      <%= yield %>
+      <%= render "shared/footer" %>
+      <%= render "shared/flashes" %>
+    </div>
   </body>
 </html>

@@ -24,6 +24,9 @@ User.new(username: "Naomi", email: "naomi@exemple.com", nickname: "naomi", level
 
 puts "Creating structures..."
 Structure.new(name: "Fields", image_url: "test", level: 1, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 5, wood_production: 0, stone_production: 0, gold_production: 0, food_production: 5).save!
+Structure.new(name: "Mines", image_url: "test", level: 1, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 5, wood_production: 0, stone_production: 5, gold_production: 0, food_production: 0).save!
+Structure.new(name: "Sawmill", image_url: "test", level: 1, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 5, wood_production: 5, stone_production: 0, gold_production: 0, food_production: 0).save!
+Structure.new(name: "Bazar", image_url: "test", level: 1, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 5, wood_production: 0, stone_production: 0, gold_production: 5, food_production: 0).save!
 
 puts "Creating researches..."
 Research.new(name: "Forge", image_url: "test", level: 1, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 5, effect: "nothing").save!
@@ -37,6 +40,9 @@ Homebase.new(user_id: User.last.id, name: "Homebase Testing", coordinates: "1,1"
 
 puts "Creating structure builts..."
 StructureBuilt.new(structure_id: Structure.first.id, homebase_id: Homebase.first.id).save!
+StructureBuilt.new(structure_id: Structure.all[1].id, homebase_id: Homebase.first.id).save!
+StructureBuilt.new(structure_id: Structure.all[2].id, homebase_id: Homebase.first.id).save!
+StructureBuilt.new(structure_id: Structure.all[3].id, homebase_id: Homebase.first.id).save!
 
 puts "Creating research levels..."
 ResearchLevel.new(research_id: Research.first.id, homebase_id: Homebase.first.id).save!

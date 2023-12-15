@@ -1,5 +1,49 @@
-<% @homebase.structures.each do |structure| %>
-  <%= structure.name + " Lv. " + structure.level.to_s %>
-  <%= link_to "Upgrade", "#" %>
-<% end %>
-<br>
+
+<div class="conteneur-bleu" style="background-image: url('<%= image_path ('box-blue')%>'); background-size: cover;">
+  <div class="conteneur-grille">
+    <% structure = @homebase.structures.find_by(name: "Fields") %>
+	  <div class="boite boite-1" style="--img: url('<%= image_path ('fields')%>');">
+      <div class="details">
+        <h2><strong><%= structure.name %> - Level <%= structure.level %></strong></h2>
+        <p><strong>Production: -</strong> <i class="fa-solid fa-burger fa-lg" style="color: brown"></i> <%= structure.food_production %>/min</p>
+        <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= structure.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= structure.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= structure.gold_cost %></p>
+        <div class="d-flex justify-content-center align-items-center w-100">
+          <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= structure.upgrade_time %> min</button>
+        </div>
+      </div>
+    </div>
+    <% structure = @homebase.structures.find_by(name: "Mines") %>
+    <div class="boite boite-2" style="--img: url('<%= image_path ('mines')%>');">
+      <div class="details">
+        <h2><strong><%= structure.name %> - Level <%= structure.level %></strong></h2>
+        <p><strong>Production: -</strong> <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= structure.stone_production %>/min</p>
+        <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= structure.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= structure.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= structure.gold_cost %></p>
+        <div class="d-flex justify-content-center align-items-center w-100">
+          <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= structure.upgrade_time %> min</button>
+        </div>
+      </div>
+    </div>
+    <% structure = @homebase.structures.find_by(name: "Sawmill") %>
+    <div class="boite boite-3" style="--img: url('<%= image_path ('sawmill')%>');">
+      <div class="details">
+        <h2><strong><%= structure.name %> - Level <%= structure.level %></strong></h2>
+        <p><strong>Production: -</strong> <i class="fa-solid fa-tree fa-lg" style="color: green"></i> <%= structure.wood_production %>/min</p>
+        <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= structure.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= structure.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= structure.gold_cost %></p>
+        <div class="d-flex justify-content-center align-items-center w-100">
+          <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= structure.upgrade_time %> min</button>
+        </div>
+      </div>
+    </div>
+    <% structure = @homebase.structures.find_by(name: "Bazar") %>
+    <div class="boite boite-4" style="--img: url('<%= image_path ('bazar')%>');">
+      <div class="details">
+        <h2><strong><%= structure.name %> - Level <%= structure.level %></strong></h2>
+        <p><strong>Production: -</strong> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= structure.gold_production %>/min</p>
+        <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= structure.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= structure.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= structure.gold_cost %></p>
+        <div class="d-flex justify-content-center align-items-center w-100">
+          <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= structure.upgrade_time %> min</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
