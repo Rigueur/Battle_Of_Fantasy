@@ -48,7 +48,7 @@ puts "Creating defenses..."
   Defense.new(name: "Walls", image_url: "test", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "nothing").save!
   Defense.new(name: "Towers", image_url: "test", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "nothing").save!
   Defense.new(name: "Traps", image_url: "test", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "nothing").save!
-  Defense.new(name: "Moat", image_url: "test", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "nothing").save!
+  Defense.new(name: "Magic Barrier", image_url: "test", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "nothing").save!
 end
 index = 0
 
@@ -73,7 +73,7 @@ puts "Creating defense builts..."
 DefenseBuilt.new(defense_id: Defense.find_by(name: "Walls", level: 0).id, town_id: Town.first.id).save!
 DefenseBuilt.new(defense_id: Defense.find_by(name: "Towers", level: 0).id, town_id: Town.first.id).save!
 DefenseBuilt.new(defense_id: Defense.find_by(name: "Traps", level: 0).id, town_id: Town.first.id).save!
-DefenseBuilt.new(defense_id: Defense.find_by(name: "Moat", level: 0).id, town_id: Town.first.id).save!
+DefenseBuilt.new(defense_id: Defense.find_by(name: "Magic Barrier", level: 0).id, town_id: Town.first.id).save!
 
 puts "Creating archers..."
 Archer.new(name: "Archer", town_id:Town.last.id, level: 1, hp: 10, armor_type: "light", attack: 5, attack_type: "physical", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false).save!
