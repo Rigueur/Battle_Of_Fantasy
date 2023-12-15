@@ -8,14 +8,17 @@
       <%= t.number_field :qty %>
 
       <%= t.submit "Recruit" %>
+      Cost : Food :<%=  %> Gold : <%=  %> Energy : <%=  %>
       <% end %>
 <% end %>
 
-SAVE :
+<%= link_to 'Back', town_path(@town) %>
+
+<%# SAVE : %>
 <% Unit.roles.each do |role| %>
   <% instance_variable_get("@#{role.pluralize}").each do |unit| %>
-    <p><%= unit.name %></p>
-    <p>Level : <%= unit.level %></p>
-    <p><%= link_to "Upgrade", "#" %></p>
+    <p><% unit.name %></p>
+    <p><%# Level : <% unit.level %></p>
+    <p><% link_to "Upgrade", "#" %></p>
   <% end %>
 <% end %>

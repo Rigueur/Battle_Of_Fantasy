@@ -11,7 +11,7 @@
           <%= link_to towns_defense_update_path(@town.id, defense_built.id), data:{ turbo_method: "patch"}, class: "text-decoration-none" do %>
             <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= defense.upgrade_time %> min</button>
           <% end %>
-        /div>
+        </div>
       </div>
     </div>
     <% defense = @town.defenses.find_by(name: "Towers") %>
