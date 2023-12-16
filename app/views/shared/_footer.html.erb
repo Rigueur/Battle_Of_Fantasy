@@ -9,7 +9,7 @@
         data-resources-gold-production-value="<%= @town.structures.pluck(:gold_production).compact.sum %>"
         data-resources-last-update-time-value="<%= @town.resources_updated_at.to_i %>">
         <div class="col-3 d-flex justify-content-end align-items-center">
-          <img src="<%= image_path ('energy-bar')%>" alt="" id="energy-bar">
+          <img src="<%= asset_path ('energy-bar.png')%>" alt="" id="energy-bar">
         </div>
           <div class="col-5 d-flex justify-content-start align-items-center">
             <div class="resource-bar d-flex justify-content-evenly align-items-center">
