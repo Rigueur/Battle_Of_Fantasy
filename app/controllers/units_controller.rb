@@ -31,9 +31,98 @@ class UnitsController < ApplicationController
 
     # refresh the page
     redirect_to request.referrer
-end
+  end
+
+  def cost
+    role = params[:role]
+    level = params[:level].to_i
+    stats = unit_stats(role, level)
+    render json: { foodCost: stats[:food_recruit_cost], goldCost: stats[:gold_recruit_cost], energyCost: stats[:energy_recruit_cost] }
+  end
+
+  def role_index
+    @town = Town.find(params[:town_id])
+    @role = params[:role]
+    @units = @town.send(@role.pluralize.downcase).where(role: @role)
+  end
+
+  def upgrade
+    # Get the role and level from the params
+    role = params[:role]
+    level = params[:level].to_i
+
+    # Get the quantity to be upgraded
+    quantity = params[:quantity].to_i
+
+    # Get the units to be upgraded
+    units = Unit.where(role: role, level: level).limit(quantity)
+
+    # Calculate the new level
+    new_level = level + 1
+
+    # Get the stats for the new level
+    new_stats = unit_stats(role, new_level)
+
+    # Get the town
+    town = Town.find(params[:town_id])
+
+    # Check if the town has enough resources to upgrade the units
+    total_gold_cost = new_stats[:gold_train_cost] * quantity
+    total_food_cost = new_stats[:food_train_cost] * quantity
+    total_energy_cost = new_stats[:energy_train_cost] * quantity
+
+    if town.gold_quantity >= total_gold_cost && town.food_quantity >= total_food_cost && current_user.energy >= total_energy_cost
+      # Deduct the upgrade cost from the town's resources
+      town.gold_quantity -= total_gold_cost
+      town.food_quantity -= total_food_cost
+      current_user.energy -= total_energy_cost
+
+      # Update the units' stats
+      units.each do |unit|
+        unit.update(new_stats)
+      end
+
+      # Save the town and the units
+      if town.save && units.all?(&:save) && current_user.save
+        flash[:notice] = "Units upgraded"
+      else
+        flash[:alert] = "Failed to upgrade units"
+      end
+    else
+      flash[:alert] = "Not enough resources to upgrade these units"
+    end
+
+    # Redirect to the previous page
+    redirect_to request.referrer
+  end
+
+  def upgrade_cost
+    role = params[:role]
+    level = params[:level].to_i
+    quantity = params[:quantity].to_i
+
+    result = calculate_upgrade_cost(role, level, quantity)
+
+    render json: result
+  end
 
   private
+
+  def calculate_upgrade_cost(role, level, quantity)
+    # Calculate the new level
+    new_level = level + 1
+
+    # Get the stats for the new level
+    new_stats = unit_stats(role, new_level)
+
+    # Calculate the total cost
+    total_gold_cost = new_stats[:gold_train_cost] * quantity
+    total_food_cost = new_stats[:food_train_cost] * quantity
+    total_energy_cost = new_stats[:energy_train_cost] * quantity
+
+    # Return the total cost and the stats
+    { cost: { gold: total_gold_cost, food: total_food_cost, energy: total_energy_cost }, stats: new_stats }
+  end
 
   def unit_stats(role, level)
     case role
@@ -47,8 +136,8 @@ end
       attack_type: "physical",
       speed: 8 + 2 * level,
       stealth: 8 + 2 * level,
-      gold_recruit_cost: 5 * level,
-      food_recruit_cost: 5 * level,
+      gold_recruit_cost: 6 * level,
+      food_recruit_cost: 6 * level,
       energy_recruit_cost: 1 * level,
       gold_train_cost: 5 * level,
       food_train_cost: 5 * level,
@@ -98,8 +187,8 @@ end
       attack_type: "physical",
       speed: 10 + 2 * level,
       stealth: 10 + 2 * level,
-      gold_recruit_cost: 5 * level,
-      food_recruit_cost: 5 * level,
+      gold_recruit_cost: 12 * level,
+      food_recruit_cost: 15 * level,
       energy_recruit_cost: 1 * level,
       gold_train_cost: 5 * level,
       food_train_cost: 5 * level,
@@ -115,8 +204,8 @@ end
       attack_type: "magical",
       speed: 5 + 1 * level,
       stealth: 5 + 1 * level,
-      gold_recruit_cost: 5 * level,
-      food_recruit_cost: 5 * level,
+      gold_recruit_cost: 15 * level,
+      food_recruit_cost: 8 * level,
       energy_recruit_cost: 1 * level,
       gold_train_cost: 5 * level,
       food_train_cost: 5 * level,
