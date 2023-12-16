@@ -1,24 +1,14 @@
 <% Unit.roles.each do |role| %>
   <h2><%= role.pluralize.capitalize %> (Qty : <%= instance_variable_get("@#{role.pluralize}").size %>)</h2>
-    <%= simple_form_for([@town, @unit]) do |t|  %>
+  <%= simple_form_for([@town, @unit], html: { data: { controller: "unit", townId: @town.id } }) do |t|  %>
+    <%= t.hidden_field :role, value: role %>
 
-      <%= t.hidden_field :role, value: role %>
+    <%= t.label :qty %>
+    <%= t.number_field :qty, min: 1, data: { action: "unit#updateCost", unit_target: "qty#{role}", role: role } %>
 
-      <%= t.label :qty %>
-      <%= t.number_field :qty %>
-
-      <%= t.submit "Recruit" %>
-      Cost : Food :<%=  %> Gold : <%=  %> Energy : <%=  %>
-      <% end %>
-<% end %>
+    <%= t.submit "Recruit" %>
+    Cost : Food : <span data-unit-target="foodCost<%= role %>">0</span> Gold : <span data-unit-target="goldCost<%= role %>">0</span> Energy : <span data-unit-target="energyCost<%= role %>">0</span>  <% end %>
+    <%= link_to "Show more", role_index_town_units_path(@town, role) %>
+  <% end %>
 
 <%= link_to 'Back', town_path(@town) %>
-
-<%# SAVE : %>
-<% Unit.roles.each do |role| %>
-  <% instance_variable_get("@#{role.pluralize}").each do |unit| %>
-    <p><% unit.name %></p>
-    <p><%# Level : <% unit.level %></p>
-    <p><% link_to "Upgrade", "#" %></p>
-  <% end %>
-<% end %>
