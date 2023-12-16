@@ -1,58 +1,50 @@
-<div class="conteneur-bleu" style="background-image: url('<%= image_path ('box-blue')%>'); background-size: cover;">
+<div class="conteneur-bleu" style="background-image: url('<%= asset_path ('box-blue.png')%>'); background-size: cover;">
   <div class="conteneur-grille">
     <% research = @town.researches.find_by(name: "Forge") %>
-	  <div class="boite boite-1" style="--img: url('<%= image_path ('forge')%>');">
+	  <div class="boite boite-1" style="--img: url('<%= asset_path ('forge.png')%>');">
       <div class="details">
         <h2><strong><%= research.name %> - Level <%= research.level %></strong></h2>
         <p><strong>Effect -</strong> <i class="fa-solid fa-wand-magic-sparkles fa-lg" style="color: purple"></i> <%= research.effect %></p>
         <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= research.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= research.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= research.gold_cost %></p>
         <div class="d-flex justify-content-center align-items-center w-100">
           <% research_built = ResearchLevel.find_by(research_id: research.id, town_id: @town.id) %>
-          <%= link_to towns_research_update_path(@town.id, research_built.id), data:{ turbo_method: "patch"}, class: "text-decoration-none" do %>
-            <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= research.upgrade_time %> min</button>
-          <% end %>
+          <button turbo-method-patch="patch" href="<%=towns_research_update_path(@town.id, research_built.id)%>"class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= research.upgrade_time %> min</button>
         </div>
       </div>
     </div>
     <% research = @town.researches.find_by(name: "Barracks") %>
-    <div class="boite boite-2" style="--img: url('<%= image_path ('forge')%>');">
+    <div class="boite boite-2" style="--img: url('<%= asset_path ('forge.png')%>');">
       <div class="details">
         <h2><strong><%= research.name %> - Level <%= research.level %></strong></h2>
         <p><strong>Effect -</strong> <i class="fa-solid fa-wand-magic-sparkles fa-lg" style="color: purple"></i> <%= research.effect %></p>
         <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= research.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= research.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= research.gold_cost %></p>
         <div class="d-flex justify-content-center align-items-center w-100">
           <% research_built = ResearchLevel.find_by(research_id: research.id, town_id: @town.id) %>
-          <%= link_to towns_research_update_path(@town.id, research_built.id), data:{ turbo_method: "patch"}, class: "text-decoration-none" do %>
-            <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= research.upgrade_time %> min</button>
-          <% end %>
+          <button turbo-method-patch="patch" href="<%=towns_research_update_path(@town.id, research_built.id)%>"class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= research.upgrade_time %> min</button>
         </div>
       </div>
     </div>
     <% research = @town.researches.find_by(name: "Magic Institut") %>
-    <div class="boite boite-3" style="--img: url('<%= image_path ('forge')%>');">
+    <div class="boite boite-3" style="--img: url('<%= asset_path ('forge.png')%>');">
       <div class="details">
         <h2><strong><%= research.name %> - Level <%= research.level %></strong></h2>
         <p><strong>Effect -</strong> <i class="fa-solid fa-wand-magic-sparkles fa-lg" style="color: purple"></i> <%= research.effect %></p>
         <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= research.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= research.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= research.gold_cost %></p>
         <div class="d-flex justify-content-center align-items-center w-100">
           <% research_built = ResearchLevel.find_by(research_id: research.id, town_id: @town.id) %>
-          <%= link_to towns_research_update_path(@town.id, research_built.id), data:{ turbo_method: "patch"}, class: "text-decoration-none" do %>
-            <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= research.upgrade_time %> min</button>
-          <% end %>
+          <button turbo-method-patch="patch" href="<%=towns_research_update_path(@town.id, research_built.id)%>"class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= research.upgrade_time %> min</button>
         </div>
       </div>
     </div>
     <% research = @town.researches.find_by(name: "Monster Stable") %>
-    <div class="boite boite-4" style="--img: url('<%= image_path ('forge')%>');">
+    <div class="boite boite-4" style="--img: url('<%= asset_path ('forge.png')%>');">
       <div class="details">
         <h2><strong><%= research.name %> - Level <%= research.level %></strong></h2>
         <p><strong>Effect -</strong> <i class="fa-solid fa-wand-magic-sparkles fa-lg" style="color: purple"></i> <%= research.effect %></p>
         <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= research.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= research.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= research.gold_cost %></p>
         <div class="d-flex justify-content-center align-items-center w-100">
           <% research_built = ResearchLevel.find_by(research_id: research.id, town_id: @town.id) %>
-          <%= link_to towns_research_update_path(@town.id, research_built.id), data:{ turbo_method: "patch"}, class: "text-decoration-none" do %>
-            <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= research.upgrade_time %> min</button>
-          <% end %>
+          <button turbo-method-patch="patch" href="<%=towns_research_update_path(@town.id, research_built.id)%>"class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= research.upgrade_time %> min</button>
         </div>
       </div>
     </div>

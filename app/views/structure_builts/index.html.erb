@@ -1,58 +1,50 @@
-<div class="conteneur-bleu" style="background-image: url('<%= image_path ('box-blue')%>'); background-size: cover;">
+<div class="conteneur-bleu" style="background-image: url('<%= asset_path ('box-blue.png')%>'); background-size: cover;">
   <div class="conteneur-grille">
     <% structure = @town.structures.find_by(name: "Fields") %>
-	  <div class="boite boite-1" style="--img: url('<%= image_path ('fields')%>');">
+	  <div class="boite boite-1" style="--img: url('<%= asset_path ('fields.png')%>');">
       <div class="details">
         <h2><strong><%= structure.name %> - Level <%= structure.level %></strong></h2>
         <p><strong>Production: -</strong> <i class="fa-solid fa-burger fa-lg" style="color: brown"></i> <%= structure.food_production %>/min</p>
         <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= structure.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= structure.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= structure.gold_cost %></p>
         <div class="d-flex justify-content-center align-items-center w-100">
           <% structure_built = StructureBuilt.find_by(structure_id: structure.id, town_id: @town.id) %>
-          <%= link_to towns_structure_update_path(@town.id, structure_built.id), data:{ turbo_method: "patch"}, class: "text-decoration-none" do %>
-            <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= structure.upgrade_time %> min</button>
-          <% end %>
+          <a data-turbo-method= "patch" href="<%=towns_structure_update_path(@town.id, structure_built.id)%>" class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= structure.upgrade_time %> min</a>
         </div>
       </div>
     </div>
     <% structure = @town.structures.find_by(name: "Mine") %>
-    <div class="boite boite-2" style="--img: url('<%= image_path ('mines')%>');">
+    <div class="boite boite-2" style="--img: url('<%= asset_path ('mines.png')%>');">
       <div class="details">
         <h2><strong><%= structure.name %> - Level <%= structure.level %></strong></h2>
         <p><strong>Production: -</strong> <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= structure.stone_production %>/min</p>
         <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= structure.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= structure.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= structure.gold_cost %></p>
         <div class="d-flex justify-content-center align-items-center w-100">
           <% structure_built = StructureBuilt.find_by(structure_id: structure.id, town_id: @town.id) %>
-          <%= link_to towns_structure_update_path(@town.id, structure_built.id), data:{ turbo_method: "patch"}, class: "text-decoration-none" do %>
-            <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= structure.upgrade_time %> min</button>
-          <% end %>
+          <a data-turbo-method= "patch" href="<%=towns_structure_update_path(@town.id, structure_built.id)%>" class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= structure.upgrade_time %> min</a>
         </div>
       </div>
     </div>
     <% structure = @town.structures.find_by(name: "Sawmill") %>
-    <div class="boite boite-3" style="--img: url('<%= image_path ('sawmill')%>');">
+    <div class="boite boite-3" style="--img: url('<%= asset_path ('sawmill.png')%>');">
       <div class="details">
         <h2><strong><%= structure.name %> - Level <%= structure.level %></strong></h2>
         <p><strong>Production: -</strong> <i class="fa-solid fa-tree fa-lg" style="color: green"></i> <%= structure.wood_production %>/min</p>
         <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= structure.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= structure.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= structure.gold_cost %></p>
         <div class="d-flex justify-content-center align-items-center w-100">
           <% structure_built = StructureBuilt.find_by(structure_id: structure.id, town_id: @town.id) %>
-          <%= link_to towns_structure_update_path(@town.id, structure_built.id), data:{ turbo_method: "patch"}, class: "text-decoration-none" do %>
-            <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= structure.upgrade_time %> min</button>
-          <% end %>
+          <a data-turbo-method= "patch" href="<%=towns_structure_update_path(@town.id, structure_built.id)%>" class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= structure.upgrade_time %> min</a>
         </div>
       </div>
     </div>
     <% structure = @town.structures.find_by(name: "Market") %>
-    <div class="boite boite-4" style="--img: url('<%= image_path ('bazar')%>');">
+    <div class="boite boite-4" style="--img: url('<%= asset_path ('bazar.png')%>');">
       <div class="details">
         <h2><strong><%= structure.name %> - Level <%= structure.level %></strong></h2>
         <p><strong>Production: -</strong> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= structure.gold_production %>/min</p>
         <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= structure.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= structure.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= structure.gold_cost %></p>
         <div class="d-flex justify-content-center align-items-center w-100">
           <% structure_built = StructureBuilt.find_by(structure_id: structure.id, town_id: @town.id) %>
-          <%= link_to towns_structure_update_path(@town.id, structure_built.id), data:{ turbo_method: "patch"}, class: "text-decoration-none" do %>
-            <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= structure.upgrade_time %> min</button>
-          <% end %>
+          <a data-turbo-method= "patch" href="<%=towns_structure_update_path(@town.id, structure_built.id)%>" class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= structure.upgrade_time %> min</a>
         </div>
       </div>
     </div>

@@ -1,58 +1,50 @@
-<div class="conteneur-bleu" style="background-image: url('<%= image_path ('box-blue')%>'); background-size: cover;">
+<div class="conteneur-bleu" style="background-image: url('<%= asset_path ('box-blue.png')%>'); background-size: cover;">
   <div class="conteneur-grille">
     <% defense = @town.defenses.find_by(name: "Walls") %>
-	  <div class="boite boite-1" style="--img: url('<%= image_path ('walls')%>');">
+	  <div class="boite boite-1" style="--img: url('<%= asset_path ('walls.png')%>');">
       <div class="details">
         <h2><strong><%= defense.name %> - Level <%= defense.level %></strong></h2>
         <p><strong>Effect -</strong> <i class="fa-solid fa-wand-magic-sparkles fa-lg" style="color: purple"></i> <%= defense.effect %></p>
         <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= defense.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= defense.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= defense.gold_cost %></p>
         <div class="d-flex justify-content-center align-items-center w-100">
           <% defense_built = DefenseBuilt.find_by(defense_id: defense.id, town_id: @town.id) %>
-          <%= link_to towns_defense_update_path(@town.id, defense_built.id), data:{ turbo_method: "patch"}, class: "text-decoration-none" do %>
-            <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= defense.upgrade_time %> min</button>
-          <% end %>
+          <a data-turbo-method="patch" href="<%=towns_defense_update_path(@town.id, defense_built.id)%>" class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= defense.upgrade_time %> min</a>
         </div>
       </div>
     </div>
     <% defense = @town.defenses.find_by(name: "Towers") %>
-    <div class="boite boite-2" style="--img: url('<%= image_path ('walls')%>');">
+    <div class="boite boite-2" style="--img: url('<%= asset_path ('walls.png')%>');">
       <div class="details">
         <h2><strong><%= defense.name %> - Level <%= defense.level %></strong></h2>
         <p><strong>Effect -</strong> <i class="fa-solid fa-wand-magic-sparkles fa-lg" style="color: purple"></i> <%= defense.effect %></p>
         <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= defense.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= defense.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= defense.gold_cost %></p>
         <div class="d-flex justify-content-center align-items-center w-100">
           <% defense_built = DefenseBuilt.find_by(defense_id: defense.id, town_id: @town.id) %>
-          <%= link_to towns_defense_update_path(@town.id, defense_built.id), data:{ turbo_method: "patch"}, class: "text-decoration-none" do %>
-            <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= defense.upgrade_time %> min</button>
-          <% end %>
+          <a data-turbo-method="patch" href="<%=towns_defense_update_path(@town.id, defense_built.id)%>" class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= defense.upgrade_time %> min</a>
         </div>
       </div>
     </div>
     <% defense = @town.defenses.find_by(name: "Traps") %>
-    <div class="boite boite-3" style="--img: url('<%= image_path ('walls')%>');">
+    <div class="boite boite-3" style="--img: url('<%= asset_path ('walls.png')%>');">
       <div class="details">
         <h2><strong><%= defense.name %> - Level <%= defense.level %></strong></h2>
         <p><strong>Effect -</strong> <i class="fa-solid fa-wand-magic-sparkles fa-lg" style="color: purple"></i> <%= defense.effect %></p>
         <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= defense.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= defense.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= defense.gold_cost %></p>
         <div class="d-flex justify-content-center align-items-center w-100">
           <% defense_built = DefenseBuilt.find_by(defense_id: defense.id, town_id: @town.id) %>
-          <%= link_to towns_defense_update_path(@town.id, defense_built.id), data:{ turbo_method: "patch"}, class: "text-decoration-none" do %>
-            <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= defense.upgrade_time %> min</button>
-          <% end %>
+          <a data-turbo-method="patch" href="<%=towns_defense_update_path(@town.id, defense_built.id)%>" class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= defense.upgrade_time %> min</a>
         </div>
       </div>
     </div>
     <% defense = @town.defenses.find_by(name: "Magic Barrier") %>
-    <div class="boite boite-4" style="--img: url('<%= image_path ('walls')%>');">
+    <div class="boite boite-4" style="--img: url('<%= asset_path ('walls.png')%>');">
       <div class="details">
         <h2><strong><%= defense.name %> - Level <%= defense.level %></strong></h2>
         <p><strong>Effect -</strong> <i class="fa-solid fa-wand-magic-sparkles fa-lg" style="color: purple"></i> <%= defense.effect %></p>
         <p><strong>Requirements -</strong> <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= defense.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= defense.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= defense.gold_cost %></p>
         <div class="d-flex justify-content-center align-items-center w-100">
           <% defense_built = DefenseBuilt.find_by(defense_id: defense.id, town_id: @town.id) %>
-          <%= link_to towns_defense_update_path(@town.id, defense_built.id), data:{ turbo_method: "patch"}, class: "text-decoration-none" do %>
-            <button class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= defense.upgrade_time %> min</button>
-          <% end %>
+          <a data-turbo-method="patch" href="<%=towns_defense_update_path(@town.id, defense_built.id)%>" class="btn btn-primary w-50"><strong>Upgrade</strong><br><i class="fa-solid fa-clock" style="color: orange"></i> <%= defense.upgrade_time %> min</a>
           </div>
       </div>
     </div>
