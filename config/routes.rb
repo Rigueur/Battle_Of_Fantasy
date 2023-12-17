@@ -20,7 +20,11 @@ Rails.application.routes.draw do
         get :cost
       end
     end
-    resources :battles, only: [:new, :create]
+    resources :battles, only: [:new, :create] do
+      collection do
+        post :calculate_energy_cost
+      end
+    end
   end
 
   get "users/:users_username/profile" => "users#show", as: :user_profile

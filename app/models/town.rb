@@ -11,6 +11,7 @@ class Town < ApplicationRecord
   has_many :structures, through: :structure_builts
   has_many :research_levels
   has_many :researches, through: :research_levels
+  has_many :units
   has_many :archers
   has_many :soldiers
   has_many :wizards
