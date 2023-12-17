@@ -54,17 +54,17 @@ class UnitsController < ApplicationController
     # Get the quantity to be upgraded
     quantity = params[:quantity].to_i
 
+    # Get the town
+    town = Town.find(params[:town_id])
+
     # Get the units to be upgraded
-    units = Unit.where(role: role, level: level).limit(quantity)
+    units = Unit.where(town_id: town.id, role: role, level: level).limit(quantity)
 
     # Calculate the new level
     new_level = level + 1
 
     # Get the stats for the new level
     new_stats = unit_stats(role, new_level)
-
-    # Get the town
-    town = Town.find(params[:town_id])
 
     # Check if the town has enough resources to upgrade the units
     total_gold_cost = new_stats[:gold_train_cost] * quantity
