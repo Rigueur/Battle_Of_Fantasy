@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     patch :update_energy, on: :member
     resources :units, only: [:index, :update, :create] do
       post 'upgrade', on: :collection
-      get ':role', to: 'units#role_index', constraints: { role: /#{Unit.roles.join('|')}/ }, as: :role_index, on: :collection
+      get ':role', to: 'units#role_index', constraints: lambda { |req| Unit.roles.include?(req.params[:role]) }, as: :role_index, on: :collection
       collection do
         get :cost
       end
