@@ -1,3 +1,4 @@
+
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -81,3 +82,9 @@ Archer.new(name: "Archer 2", town_id:Town.first.id, level: 1, hp: 10, armor_type
 
 puts "Creatings mages..."
 Mage.new(name: "Mage", town_id:Town.last.id, level: 1, hp: 10, armor_type: "light", attack: 5, attack_type: "magic", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false).save!
+
+Horseman.new(name: "Horseman", town_id:Town.last.id, level: 1, hp: 10, armor_type: "light", attack: 5, attack_type: "magic", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false).save!
+
+Soldier.new(name: "Soldier", town_id:Town.last.id, level: 1, hp: 10, armor_type: "light", attack: 5, attack_type: "magic", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false).save!
+
+Wizard.new(name: "Wizard", town_id:Town.last.id, level: 1, hp: 10, armor_type: "light", attack: 5, attack_type: "magic", speed: 5, stealth: 5, gold_recruit_cost: 5, food_recruit_cost: 5, energy_recruit_cost: 5, gold_train_cost: 5, food_train_cost: 5, energy_train_cost: 5, enrolled: false).save!

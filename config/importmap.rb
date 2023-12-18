@@ -7,3 +7,5 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "@popperjs/core", to: "popper.js", preload: true
+pin "swiper", to: "https://ga.jspm.io/npm:swiper@11.0.5/swiper.mjs", preload: true
+pin "swiper/bundle", to: "https://ga.jspm.io/npm:swiper@11.0.5/swiper-bundle.mjs"

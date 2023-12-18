@@ -1,3 +1,5 @@
+
+<!--
 <% Unit.roles.each do |role| %>
   <h2><%= role.pluralize.capitalize %> (Qty : <%= instance_variable_get("@#{role.pluralize}").size %>)</h2>
     <%= simple_form_for([@town, @unit]) do |t|  %>
@@ -19,3 +21,35 @@ SAVE :
     <p><%= link_to "Upgrade", "#" %></p>
   <% end %>
 <% end %>
+-->
+
+
+<div class="conteneur-bleu" style="background-image: url('<%= image_path ('box-blue')%>'); background-size: cover;" data-controller="swiper">
+  <div class="swiper">
+    <div class="swiper-wrapper" style="height: fit-content">
+    <% Unit.roles.each do |role| %>
+      <div class="swiper-slide unit">
+        <img
+          class="unit-img"
+          src="<%= asset_path ('knight')%>"
+          alt="knight" />
+
+        <div class="unit-body">
+          <div class="unit-detail">
+            <h2 class="unit-name"><%= role.pluralize.capitalize %></h2>
+            <p style="font-size: 1.2rem;"><i class="fa-solid fa-users fa-lg" style="color: #382C3D"></i>  <%= instance_variable_get("@#{role.pluralize}").size %></p>
+          </div>
+              <%= simple_form_for([@town, @unit]) do |t|  %>
+          <div class="unit-quantity">
+            <%= t.hidden_field :role, value: role %>
+            <%= t.number_field :qty, class:"unit-label text-center", placeholder: "0" %>
+            <%= t.submit "Recruit", class:"unit-recruit btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+<% end %>
+    </div>
+    <div class="swiper-scrollbar" style="position: relative;"></div>
+  </div>
+</div>
