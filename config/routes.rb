@@ -13,7 +13,18 @@ Rails.application.routes.draw do
     post 'end_defense', on: :member
     patch :update_resources, on: :member
     patch :update_energy, on: :member
-    resources :units, only: [:index, :update, :create]
+    resources :units, only: [:index, :update, :create] do
+      post 'upgrade', on: :collection
+      get ':role', to: 'units#role_index', constraints: lambda { |req| Unit.roles.include?(req.params[:role]) }, as: :role_index, on: :collection
+      collection do
+        get :cost
+      end
+    end
+    resources :battles, only: [:new, :create] do
+      collection do
+        post :calculate_energy_cost
+      end
+    end
   end
 
   get "users/:users_username/profile" => "users#show", as: :user_profile
@@ -26,4 +37,8 @@ Rails.application.routes.draw do
 
   get "towns/:town_id/defenses" => "defense_builts#index", as: :towns_defenses
   patch "towns/:town_id/defenses/:id" => "defense_builts#update", as: :towns_defense_update
+
+  get 'units/upgrade_cost', to: 'units#upgrade_cost'
+
+  resources :battles, only: [:show]
 end

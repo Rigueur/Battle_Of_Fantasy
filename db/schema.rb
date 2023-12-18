@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_14_093757) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_17_214511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,12 +41,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_14_093757) do
   create_table "battles", force: :cascade do |t|
     t.integer "energy_cost"
     t.text "result"
-    t.bigint "attacking_base_id", null: false
-    t.bigint "defending_base_id", null: false
+    t.bigint "attacking_town_id", null: false
+    t.bigint "defending_town_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["attacking_base_id"], name: "index_battles_on_attacking_base_id"
-    t.index ["defending_base_id"], name: "index_battles_on_defending_base_id"
+    t.text "attacking_units_lost"
+    t.text "defending_units_lost"
+    t.text "resources_won"
+    t.index ["attacking_town_id"], name: "index_battles_on_attacking_town_id"
+    t.index ["defending_town_id"], name: "index_battles_on_defending_town_id"
   end
 
   create_table "defense_builts", force: :cascade do |t|
@@ -291,8 +294,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_14_093757) do
   end
 
   add_foreign_key "archers", "towns"
-  add_foreign_key "battles", "users", column: "attacking_base_id"
-  add_foreign_key "battles", "users", column: "defending_base_id"
+  add_foreign_key "battles", "users", column: "attacking_town_id"
+  add_foreign_key "battles", "users", column: "defending_town_id"
   add_foreign_key "defense_builts", "defenses"
   add_foreign_key "defense_builts", "towns"
   add_foreign_key "horsemen", "towns"

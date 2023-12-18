@@ -1,0 +1,41 @@
+<%= form_with(url: town_battles_path, method: :post, data: { controller: "battle" }) do %>
+  <%= hidden_field_tag "attacking_town_id", @town.id, data: { battle_target: "attackingTownId" } %>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Select the town you want to attack</h2>
+      <% Town.all.each_with_index do |town, index| %>
+        <% next if town.user == current_user %>
+        <%= radio_button_tag "battle[defending_town_id]", town.id, index.zero?, data: { action: "change->battle#updateEnergyCost" } %>
+        <%= town.name %>
+        <%= town.user.nickname %>
+        <br>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <h2>Select the units you want to send to battle</h2>
+      <% Unit.roles.each do |role| %>
+        <%# skip if the @town doesnt have any unit of this role %>
+        <% next unless @town.units.where(role: role).any? %>
+        <% @town.units.where(role: role).pluck(:level).uniq.map(&:to_i).sort.reverse.each do |level| %>
+          <%= label_tag "units[#{role}][#{level}]", "Quantity of #{role.pluralize.capitalize} at level #{level}:" %>
+          <div class="row">
+            <div class="col-md-8">
+              <%= number_field_tag "units[#{role}][#{level}]", 0, in: 0..@town.units.where(role: role, level: level).count, class: 'form-control', data: { battle_target: "unit", action: "change->battle#updateEnergyCost" } %>
+            </div>
+            <div class="col-md-4">
+              <%= button_tag "Max", type: 'button', class: 'btn btn-secondary', onclick: "document.getElementById('units_#{role}_#{level}').value = #{@town.units.where(role: role, level: level).count}", data: { battle_target: "maxButton" } %>
+              <%= button_tag "None", type: 'button', class: 'btn btn-secondary', onclick: "document.getElementById('units_#{role}_#{level}').value = 0", data: { battle_target: "noneButton" } %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <%= submit_tag "Start Battle", class: "btn btn-primary", data: { battle_target: "submitButton" } %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,36 @@
+<!-- FILEPATH: /home/steven/code/Rigueur/Battle_Of_Fantasy/app/views/battles/battle_result.html.erb -->
+
+<h1>Battle Result</h1>
+
+<p>Attacking Town: <%= @battle.attacking_town.name %></p>
+<p>Attacking User: <%= @battle.attacking_town.user.nickname %></p>
+
+<p>Defending Town: <%= @battle.defending_town.name %></p>
+<p>Defending User: <%= @battle.defending_town.user.nickname %></p>
+
+<p>Energy Cost: <%= @battle.energy_cost %></p>
+
+<p>Result: <%= @battle.result %></p>
+
+<p>Attacking Units lost:</p>
+<ul>
+  <% JSON.parse(@battle.attacking_units_lost.gsub('=>', ':')).each do |role, units| %>
+    <li><%= role %>: <%= units %></li>
+  <% end %>
+</ul>
+
+<p>Defending Units lost:</p>
+<ul>
+  <% JSON.parse(@battle.defending_units_lost.gsub('=>', ':')).each do |role, units| %>
+    <li><%= role %>: <%= units %></li>
+  <% end %>
+</ul>
+
+<p>Ressources won:</p>
+<ul>
+  <% JSON.parse(@battle.resources_won).each do |resource, quantity| %>
+    <li><%= resource %>: <%= quantity %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back', town_path(@town) %>

@@ -1,8 +1,8 @@
 
 <div class="conteneur" data-controller="displaymenu" data-action="click->displaymenu#remove">
-  <img src="<%= image_path ('logo')%>" alt="" id="logo">
-  <div class="avatar-icon" style="background-image: url('<%= image_path ('user-avatar') %>'); background-size: cover;">
-    <img src="<%= image_path ('avatar-border') %>" alt="" id="avatar-border">
+  <%= image_tag 'logo.png',  alt: "", id: "logo"%>
+  <div class="avatar-icon" style="background-image: url('<%= asset_path ('user-avatar.png') %>'); background-size: cover;">
+    <%= image_tag 'avatar-border.png', alt: "", id: "avatar-border"%>
     <div class="profile-card d-flex flex-column justify-content-end align-items-end">
       <div class="user-infos d-flex flex-column">
         <div class="d-flex flex-row justify-content-evenly align-items-center h-50">
@@ -16,16 +16,16 @@
   </div>
 
   <div class="town-icon">
-    <img src="<%= image_path ('town-icon') %>" alt="">
+    <%= image_tag 'town-icon.png' %>
   </div>
 
   <div class="icons-menu-left">
     <div class="facilities-icon" data-action="click->displaymenu#display" data-displaymenu-target="icon">
-      <img src="<%= image_path ('facilities-icon') %>" alt="" class="hover-image">
+      <%= image_tag 'facilities-icon.png', alt: "", class: "hover-image"%>
       <div class="facilities-menu d-flex flex-column justify-content-evenly align-items-center" data-displaymenu-target="menu">
         <%= link_to towns_structures_path(@town), class: "text-decoration-none" do %>
           <div class="structures-icon d-flex justify-content-between align-items-center">
-            <img src="<%= image_path ('structures-icon')%>" alt="" id="s-icon">
+            <%= image_tag 'structures-icon.png', alt: "", id: "s-icon"%>
             <% if @town.construction_ongoing %>
               <div class="d-flex flex-column justify-content-evenly align-items-center">
                 <h3> Buildings</h3>
@@ -40,7 +40,7 @@
         <% end %>
         <%= link_to towns_researches_path(@town), class: "text-decoration-none" do %>
           <div class="researches-icon d-flex justify-content-between align-items-center">
-            <img src="<%= image_path ('researches-icon')%>" alt="" id="r-icon">
+            <%= image_tag 'researches-icon.png', alt: "", id: "r-icon"%>
             <% if @town.research_ongoing %>
               <div class="d-flex flex-column justify-content-evenly align-items-center">
                 <h3> Research</h3>
@@ -55,7 +55,7 @@
         <% end %>
         <%= link_to towns_defenses_path(@town), class: "text-decoration-none" do %>
           <div class="defenses-icon d-flex justify-content-between align-items-center">
-            <img src="<%= image_path ('defenses-icon')%>" alt="" id="d-icon">
+            <%= image_tag 'defenses-icon.png', alt: "", id: "d-icon" %>
             <% if @town.defense_ongoing %>
               <div class="d-flex flex-column justify-content-evenly align-items-center">
                 <h3> Defenses</h3>
@@ -72,25 +72,27 @@
     </div>
     <%= link_to town_units_path(@town), class: "text-decoration-none" do %>
       <div class="units-icon">
-        <img src="<%= image_path ('units-icon') %>" alt="">
+        <%= image_tag 'units-icon.png', alt: "" %>
       </div>
     <% end %>
-    <div class="battle-icon">
-      <img src="<%= image_path ('battle-icon') %>" alt="">
-    </div>
+    <%= link_to new_town_battle_path(@town), class: "text-decoration-none z-1" do %>
+      <div class="battle-icon">
+        <%= image_tag 'battle-icon.png', alt: "" %>
+      </div>
+    <% end %>
   </div>
 
 
 
   <div class="icons-menu-right">
     <div class="facilities-icon">
-      <img src="<%= image_path ('messages-icon') %>" alt="" class="hover-image">
+      <%= image_tag 'messages-icon.png', alt: "", class: "hover-image" %>
     </div>
     <div class="units-icon">
-      <img src="<%= image_path ('friends-icon') %>" alt="">
+      <%= image_tag 'friends-icon.png', alt: "" %>
     </div>
     <div class="battle-icon">
-      <img src="<%= image_path ('settings-icon') %>" alt="">
+      <%= image_tag 'settings-icon.png', alt: "" %>
     </div>
   </div>
 
@@ -98,7 +100,7 @@
     </div> %>
 
   <div class="character-container">
-    <img src="<%= image_path ('user-character')%>" alt="">
+    <%= image_tag 'user-character.png', alt: "" %>
   </div>
 
 </div>

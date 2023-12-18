@@ -1,30 +1,4 @@
-
-<!--
-<% Unit.roles.each do |role| %>
-  <h2><%= role.pluralize.capitalize %> (Qty : <%= instance_variable_get("@#{role.pluralize}").size %>)</h2>
-    <%= simple_form_for([@town, @unit]) do |t|  %>
-
-      <%= t.hidden_field :role, value: role %>
-
-      <%= t.label :qty %>
-      <%= t.number_field :qty %>
-
-      <%= t.submit "Recruit" %>
-      <% end %>
-<% end %>
-
-SAVE :
-<% Unit.roles.each do |role| %>
-  <% instance_variable_get("@#{role.pluralize}").each do |unit| %>
-    <p><%= unit.name %></p>
-    <p>Level : <%= unit.level %></p>
-    <p><%= link_to "Upgrade", "#" %></p>
-  <% end %>
-<% end %>
--->
-
-
-<div class="conteneur-bleu" style="background-image: url('<%= image_path ('box-blue')%>'); background-size: cover;" data-controller="swiper">
+<div class="conteneur-bleu" style="background-image: url('<%= asset_path ('box-blue.png')%>'); background-size: cover;" data-controller="swiper">
   <div class="swiper">
     <div class="swiper-wrapper" style="height: fit-content">
     <% Unit.roles.each do |role| %>
@@ -51,7 +25,7 @@ SAVE :
         </div>
       </div>
       <% end %>
-<% end %>
+    <% end %>
     </div>
     <div class="swiper-scrollbar" style="position: relative;"></div>
   </div>

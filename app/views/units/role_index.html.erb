@@ -1,0 +1,23 @@
+<div>
+  <h1><%= @role.pluralize.capitalize %></h1>
+
+  <div class="row" data-controller="unit" data-unit-role="<%= @role %>" data-unit-count="<%= @units.group_by(&:level).transform_values(&:count).to_json %>">
+    <div class="col-md-6">
+      <% if @units.first %>
+        <%= image_tag 'user-avatar.png', class: "img-fluid" %>
+      <% end %>
+      <div data-unit-target="stats"></div>
+    </div>
+
+    <div class="col-md-6">
+      <%= form_with url: upgrade_town_units_path(role: @role), method: :post do %>
+        <%= label_tag :level, "Select a level" %>
+        <%= select_tag :level, options_for_select(@units.pluck(:level).uniq.sort, @units.pluck(:level).min), data: { action: "change->unit#updateUpgradeQty", unit_target: "level" } %>
+        <br>
+        <%= label_tag :quantity, "Select the quantity to upgrade" %>
+        <%= number_field_tag :quantity, 1, min: 1, class: "form-control", style: "width: auto;", data: { action: "change->unit#updateUpgradeQty", unit_target: "upgradeQty" } %>        <%= submit_tag "Upgrade", class: "btn btn-primary" %>
+        <span data-unit-target="upgradeCost"></span>
+      <% end %>
+    </div>
+    <%= link_to 'Back', town_units_path(@town) %>
+  </div>

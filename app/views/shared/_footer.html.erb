@@ -9,7 +9,14 @@
         data-resources-gold-production-value="<%= @town.structures.pluck(:gold_production).compact.sum %>"
         data-resources-last-update-time-value="<%= @town.resources_updated_at.to_i %>">
         <div class="col-3 d-flex justify-content-end align-items-center">
-          <img src="<%= image_path ('energy-bar')%>" alt="" id="energy-bar">
+          <div id="energy-bar" style= "background-image: url('<%= asset_path ('Empty EnergyBar.png')%>');" class= "d-flex align-items-center justify-content-center">
+            <div class="progress progress-container" role="progressbar" aria-label="Animated striped example" aria-valuenow="<%=current_user.energy%>" aria-valuemin="0" aria-valuemax="<%=70 + 10 *current_user.level.to_i%>">
+              <% energy_percent = ((100 * current_user.energy / (70 + 10 *current_user.level.to_i)).round) %>
+              <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" style="width: <%=energy_percent%>%; font-weight: 700; font-size: 2vh">
+                <%=current_user.energy%> / <%=70 + 10 *current_user.level.to_i%>
+              </div>
+            </div>
+          </div>
         </div>
           <div class="col-5 d-flex justify-content-start align-items-center">
             <div class="resource-bar d-flex justify-content-evenly align-items-center">
@@ -17,10 +24,10 @@
                 <p class="m-0" style="font-size: 1.7em;"><i class="fa-solid fa-tree fa-lg" style="color: #372E3D"></i>  <%= @town.wood_quantity %></p>
               </div>
               <div>
-                <p class="m-0" style="font-size: 1.7em;"><i class="fa-solid fa-burger fa-lg" style="color: #372E3D"></i>  <%= @town.food_quantity %></p>
+                <p class="m-0" style="font-size: 1.7em;"><i class="fa-solid fa-gem fa-lg" style="color: #372E3D"></i>  <%= @town.stone_quantity %></p>
               </div>
               <div>
-                <p class="m-0" style="font-size: 1.7em;"><i class="fa-solid fa-gem fa-lg" style="color: #372E3D"></i>  <%= @town.stone_quantity %></p>
+                <p class="m-0" style="font-size: 1.7em;"><i class="fa-solid fa-burger fa-lg" style="color: #372E3D"></i>  <%= @town.food_quantity %></p>
               </div>
               <div>
                 <p class="m-0" style="font-size: 1.7em;"><i class="fa-solid fa-coins fa-lg" style="color: #372E3D"></i>  <%= @town.gold_quantity %></p>
