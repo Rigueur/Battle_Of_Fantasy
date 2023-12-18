@@ -25,4 +25,17 @@ class Town < ApplicationRecord
   def set_resources_updated_at
     self.update(resources_updated_at: 0.minutes.from_now)
   end
+
+  def update_resources
+    if self.resources_updated_at < Time.now
+      minutes_since_last_update = ((Time.now - self.resources_updated_at) / 60).round
+      self.update(
+        wood_quantity: self.wood_quantity + (self.structures.pluck(:wood_production).compact.sum * minutes_since_last_update),
+        stone_quantity: self.stone_quantity + (self.structures.pluck(:stone_production).compact.sum * minutes_since_last_update),
+        gold_quantity: self.gold_quantity + (self.structures.pluck(:gold_production).compact.sum * minutes_since_last_update),
+        food_quantity: self.food_quantity + (self.structures.pluck(:food_production).compact.sum * minutes_since_last_update),
+        resources_updated_at: 0.minutes.from_now
+      )
+    end
+  end
 end

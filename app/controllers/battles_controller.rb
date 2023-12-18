@@ -17,6 +17,8 @@ class BattlesController < ApplicationController
       flash[:alert] = "You don't have enough energy to attack"
       render :new
     else
+      # Update defending_town's resources before calculating the result
+      @battle.defending_town.update_resources
       @battle.calculate_and_set_result(attacking_units, @battle.defending_town_id)
       if @battle.save
         # Update attacking_town.user.energy
