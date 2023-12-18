@@ -36,7 +36,10 @@ SAVE :
 
         <div class="unit-body">
           <div class="unit-detail">
-            <h2 class="unit-name"><%= role.pluralize.capitalize %></h2>
+            <div class="unit-infos">
+              <h2 class="unit-name"><%= role.pluralize.capitalize %></h2>
+              <p><i class="fa-solid fa-burger fa-lg" style="color: beige"></i> JS <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> JS <i class="fa-solid fa-bolt fa-lg" style="color: orange"></i> JS</p>
+            </div>
             <p style="font-size: 1.2rem;"><i class="fa-solid fa-users fa-lg" style="color: #382C3D"></i>  <%= instance_variable_get("@#{role.pluralize}").size %></p>
           </div>
               <%= simple_form_for([@town, @unit]) do |t|  %>
