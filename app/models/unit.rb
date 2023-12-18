@@ -3,8 +3,8 @@ class Unit < ApplicationRecord
   belongs_to :town
   validates :level, presence: true
 
-  after_validation :set_role
-  before_save :set_stats
+  before_create :set_role
+  after_save :set_stats
 
   def set_role
     self.role = self.class.name.downcase
