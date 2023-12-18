@@ -14,6 +14,8 @@ class UnitsController < ApplicationController
     @quantity = 1 if @quantity <= 0
     town = Town.find(params[:town_id])
     unit = @role.capitalize.constantize.new(level: 1, town_id: town.id)
+    unit.validate
+    unit.set_stats
 
     if town.gold_quantity >= (unit.gold_recruit_cost * @quantity) && town.food_quantity >= (unit.food_recruit_cost * @quantity) && current_user.energy >= (unit.energy_recruit_cost * @quantity)
       @quantity.times do
@@ -36,6 +38,8 @@ class UnitsController < ApplicationController
     role = params[:role]
     level = params[:level].to_i
     unit = role.capitalize.constantize.new(level: level)
+    unit.validate
+    unit.set_stats
     render json: { foodCost: unit.food_recruit_cost, goldCost: unit.gold_recruit_cost, energyCost: unit.energy_recruit_cost }
   end
 
@@ -64,6 +68,8 @@ class UnitsController < ApplicationController
 
     # Create a new unit with the new level to get the cost
     unit = role.capitalize.constantize.new(level: new_level)
+    unit.validate
+    unit.set_stats
 
     # Check if the town has enough resources to upgrade the units
     total_gold_cost = unit.gold_train_cost * quantity
@@ -114,6 +120,8 @@ class UnitsController < ApplicationController
 
     # Create a new unit with the new level to get the cost
     unit = role.capitalize.constantize.new(level: new_level)
+    unit.validate
+    unit.set_stats
 
     # Calculate the total cost
     total_gold_cost = unit.gold_train_cost * quantity

@@ -20,10 +20,28 @@ class Town < ApplicationRecord
   validates :name, :coordinates, :wood_quantity, :stone_quantity, :gold_quantity, :food_quantity, presence: true
   validates :research_ongoing, :construction_ongoing, :defense_ongoing, inclusion: [true, false]
 
-  after_create :set_resources_updated_at
+  after_create :set_resources_updated_at, :set_structures, :set_defenses, :set_researches
 
   def set_resources_updated_at
     self.update(resources_updated_at: 0.minutes.from_now)
+  end
+
+  def set_structures
+    Structure.where(level: 1).each do |structure|
+      StructureBuilt.new(structure_id: structure.id, town_id: self.id).save!
+    end
+  end
+
+  def set_defenses
+    Defense.where(level: 0).each do |defense|
+      DefenseBuilt.new(defense_id: defense.id, town_id: self.id).save!
+    end
+  end
+
+  def set_researches
+    Research.where(level: 0).each do |research|
+      ResearchLevel.new(research_id: research.id, town_id: self.id).save!
+    end
   end
 
   def update_resources
