@@ -115,11 +115,8 @@ class UnitsController < ApplicationController
   private
 
   def calculate_upgrade_cost(role, level, quantity)
-    # Calculate the new level
-    new_level = level + 1
-
-    # Create a new unit with the new level to get the cost
-    unit = role.capitalize.constantize.new(level: new_level)
+    # Create a new unit with the level to get the cost
+    unit = role.capitalize.constantize.new(level: level)
     unit.set_role
     unit.set_stats
 
@@ -128,8 +125,16 @@ class UnitsController < ApplicationController
     total_food_cost = unit.food_train_cost * quantity
     total_energy_cost = unit.energy_train_cost.to_i * quantity
 
+    # Calculate the new level
+    new_level = level + 1
+
+    # Calculate the new stats
+    new_unit = role.capitalize.constantize.new(level: new_level)
+    new_unit.set_role
+    new_unit.set_stats
+
     # Return the total cost and the stats
-    { cost: { gold: total_gold_cost, food: total_food_cost, energy: total_energy_cost }, stats: unit.attributes }
+    { cost: { gold: total_gold_cost, food: total_food_cost, energy: total_energy_cost }, stats: unit.attributes, new_stats: new_unit.attributes }
   end
 
   # We are defining the archer, mage, soldier... methods wich works as an index of a specific role (archer, mage, soldier...)
