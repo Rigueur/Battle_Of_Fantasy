@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_17_214511) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_19_143330) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,8 +48,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_214511) do
     t.text "attacking_units_lost"
     t.text "defending_units_lost"
     t.text "resources_won"
+    t.string "image_url"
     t.index ["attacking_town_id"], name: "index_battles_on_attacking_town_id"
     t.index ["defending_town_id"], name: "index_battles_on_defending_town_id"
+  end
+
+  create_table "chatrooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "defense_builts", force: :cascade do |t|
@@ -126,12 +133,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_214511) do
     t.text "content"
     t.datetime "send_time"
     t.boolean "read"
-    t.bigint "sender_id", null: false
-    t.bigint "receiver_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
-    t.index ["sender_id"], name: "index_messages_on_sender_id"
+    t.bigint "chatroom_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "research_levels", force: :cascade do |t|
@@ -223,6 +230,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_214511) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "resources_updated_at"
+    t.datetime "last_attacked_at"
     t.index ["user_id"], name: "index_towns_on_user_id"
   end
 
@@ -300,8 +308,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_214511) do
   add_foreign_key "defense_builts", "towns"
   add_foreign_key "horsemen", "towns"
   add_foreign_key "mages", "towns"
-  add_foreign_key "messages", "users", column: "receiver_id"
-  add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "messages", "chatrooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "research_levels", "researches"
   add_foreign_key "research_levels", "towns"
   add_foreign_key "soldiers", "towns"

@@ -13,16 +13,23 @@ class BattlesController < ApplicationController
 
     @battle.calculate_and_set_energy_cost(attacking_units)
 
+    # check if attacking_town.user.energy is enough
     if @battle.attacking_town.user.energy < @battle.energy_cost
       flash[:alert] = "You don't have enough energy to attack"
-      render :new
+      redirect_to request.referrer
+      # check if defending_town is under protection
+    elsif @battle.defending_town.last_attacked_at && Time.current - @battle.defending_town.last_attacked_at < 5.hours
+      flash[:alert] = "This town is currently under protection and cannot be attacked."
+      redirect_to request.referrer
     else
       # Update defending_town's resources before calculating the result
       @battle.defending_town.update_resources
-      @battle.calculate_and_set_result(attacking_units, @battle.defending_town_id)
+      message = @battle.calculate_and_set_result(attacking_units, @battle.defending_town_id, current_user)
+      current_user.reload
+      @battle.image_url = "battle-scene-#{rand(1..5)}.png"
       if @battle.save
         # Update attacking_town.user.energy
-        @battle.attacking_town.user.update(energy: @battle.attacking_town.user.energy - @battle.energy_cost)
+        @battle.attacking_town.user.update(energy: current_user.energy - @battle.energy_cost)
 
         # Update attacking_town.units
         eval(@battle.attacking_units_lost).each do |(role, level), quantity|
@@ -51,6 +58,11 @@ class BattlesController < ApplicationController
           gold_quantity: @battle.defending_town.gold_quantity - resources_won["gold"],
           food_quantity: @battle.defending_town.food_quantity - resources_won["food"]
         )
+
+        # Update defending_town.last_attacked_at
+        @battle.defending_town.update(last_attacked_at: Time.current)
+
+        flash[:notice] = message
 
         redirect_to battle_path(@battle)
       else

@@ -6,7 +6,7 @@
   <div class="row" data-controller="unit" data-unit-role="<%= @role %>" data-unit-count="<%= @units.group_by(&:level).transform_values(&:count).to_json %>">
     <div class="col-md-6">
       <% if @units.first %>
-        <%= image_tag 'user-avatar.png', class: "img-fluid" %>
+        <%= image_tag @units.first.image_url, class: "img-fluid" %>
       <% end %>
       <div data-unit-target="stats"></div>
     </div>
