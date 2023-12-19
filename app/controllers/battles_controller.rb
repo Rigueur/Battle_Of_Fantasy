@@ -19,7 +19,7 @@ class BattlesController < ApplicationController
     else
       # Update defending_town's resources before calculating the result
       @battle.defending_town.update_resources
-      @battle.calculate_and_set_result(attacking_units, @battle.defending_town_id)
+      message = @battle.calculate_and_set_result(attacking_units, @battle.defending_town_id, current_user)
       if @battle.save
         # Update attacking_town.user.energy
         @battle.attacking_town.user.update(energy: @battle.attacking_town.user.energy - @battle.energy_cost)
@@ -51,6 +51,8 @@ class BattlesController < ApplicationController
           gold_quantity: @battle.defending_town.gold_quantity - resources_won["gold"],
           food_quantity: @battle.defending_town.food_quantity - resources_won["food"]
         )
+
+        flash[:notice] = message
 
         redirect_to battle_path(@battle)
       else

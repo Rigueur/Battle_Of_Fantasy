@@ -6,8 +6,8 @@ class Battle < ApplicationRecord
     set_energy_cost(attacking_unit_ids)
   end
 
-  def calculate_and_set_result(attacking_unit_ids, defending_town_id)
-    set_result(attacking_unit_ids, defending_town_id)
+  def calculate_and_set_result(attacking_unit_ids, defending_town_id, user)
+    set_result(attacking_unit_ids, defending_town_id, user)
   end
 
   def self.select_units_for_battle(units_params, town)
@@ -41,7 +41,7 @@ class Battle < ApplicationRecord
     energy_cost
   end
 
-  def set_result(attacking_unit_ids, defending_town_id)
+  def set_result(attacking_unit_ids, defending_town_id, user)
     attacking_units = Unit.where(id: attacking_unit_ids)
     attacking_units_attack = attacking_units.sum(:attack)
     attacking_units_hp = attacking_units.sum(:hp)
@@ -54,8 +54,10 @@ class Battle < ApplicationRecord
     attacking_units_lost = Hash.new(0)
     defending_units_lost = Hash.new(0)
 
-    result = nil
-    while attacking_units_hp > 0 && defending_units_hp > 0
+    result = ""
+    resources_won_percentage = 0
+    message = ""
+    while attacking_units_hp >= 0 && defending_units_hp >= 0
       # Each army attacks the other
       defending_units_hp -= attacking_units_attack
       attacking_units_hp -= defending_units_attack
@@ -64,6 +66,7 @@ class Battle < ApplicationRecord
       if attacking_units_hp <= 0.3 * attacking_units.sum(:hp) && defending_units_hp <= 0.3 * defending_units.sum(:hp)
         result = 'Tactical retreat'
         resources_won_percentage = 0.2
+        message = user.xp_gain(30)
         break
       end
 
@@ -71,9 +74,11 @@ class Battle < ApplicationRecord
       if attacking_units_hp <= 0
         result = 'Defending town won'
         resources_won_percentage = 0
+        message = user.xp_gain(10)
       elsif defending_units_hp <= 0
         result = 'Attacking army won'
         resources_won_percentage = 0.5
+        message = user.xp_gain(50)
       end
     end
 
@@ -99,6 +104,6 @@ class Battle < ApplicationRecord
     }
 
     update(result: result, attacking_units_lost: attacking_units_lost.to_json, defending_units_lost: defending_units_lost.to_json, resources_won: resources_won.to_json)
-    result
+    message
   end
 end

@@ -4,7 +4,7 @@ class Unit < ApplicationRecord
   validates :level, presence: true
 
   before_create :set_role
-  after_save :set_stats
+  after_create :save_stats
 
   def set_role
     self.role = self.class.name.downcase
@@ -18,6 +18,26 @@ class Unit < ApplicationRecord
     define_singleton_method(role.pluralize.to_sym) do
       self.where(role: role)
     end
+  end
+
+  def self.train
+    self.where("train_ongoing = true").each do |unit|
+      unit.update(
+        train_time: unit.train_time - 1
+      )
+    end
+  end
+
+  def self.update_stats
+    self.all.each do |unit|
+      unit.set_stats
+      unit.save
+    end
+  end
+
+  def save_stats
+    self.set_stats
+    self.save!
   end
 
   def set_stats

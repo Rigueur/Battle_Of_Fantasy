@@ -18,11 +18,15 @@ Research.destroy_all
 Defense.destroy_all
 Archer.destroy_all
 Mage.destroy_all
+Horseman.destroy_all
+Soldier.destroy_all
+Wizard.destroy_all
+Battle.destroy_all
 Town.destroy_all
 User.destroy_all
 
 puts "Creating users..."
-User.new(username: "Rigueur", password: "123456", email: "rigueur@exemple.com", nickname: "Rigueur", level: 5, experience: 50, energy:80).save!
+User.new(username: "Rigueur", password: "123456", email: "rigueur@exemple.com", nickname: "Rigueur", level: 5, experience: 160, energy:80).save!
 User.new(username: "Naomi", email: "naomi@exemple.com", nickname: "naomi", level: 3, experience: 15, energy: 35,  password: "pipicaca").save!
 User.new(username: "Pierre", email: "pierre@exemple.com", nickname: "pierre", level: 2, experience: 10, energy: 20, password: "123456").save!
 
