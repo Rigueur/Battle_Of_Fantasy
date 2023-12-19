@@ -61,13 +61,24 @@ class TownsController < ApplicationController
 
   def update_energy
     @user = current_user
-    if @user.update(
-      energy: current_user.energy + params[:energy].to_i,
-      energy_updated_at: 0.minutes.from_now
-    )
-      # render partial: 'shared/footer', locals: { town: @town }
+    max_energy = 70 + (10 * @user.level.to_i)
+    if @user.energy < max_energy
+      if @user.update(
+        energy: [current_user.energy + params[:energy].to_i, max_energy].min,
+        energy_updated_at: 0.minutes.from_now
+      )
+        # render partial: 'shared/footer', locals: { town: @town }
+      else
+        render json: current_user.errors, status: :unprocessable_entity
+      end
     else
-      render json: current_user.errors, status: :unprocessable_entity
+      if @user.update(
+        energy_updated_at: 0.minutes.from_now
+      )
+        # render partial: 'shared/footer', locals: { town: @town }
+      else
+        render json: current_user.errors, status: :unprocessable_entity
+      end
     end
   end
 
@@ -77,17 +88,20 @@ class TownsController < ApplicationController
     @structure_built = StructureBuilt.order(updated_at: :desc).first
     upgraded_structure = Structure.find_by(name: @structure_built.structure.name, level: @structure_built.structure.level + 1)
     @structure_built.update({ structure_id: upgraded_structure.id })
+    flash[:notice] = current_user.xp_gain(10)
   end
 
   def upgrade_research
     @research_level = ResearchLevel.order(updated_at: :desc).first
     upgraded_research = Research.find_by(name: @research_level.research.name, level: @research_level.research.level + 1)
     @research_level.update({ research_id: upgraded_research.id })
+    flash[:notice] = current_user.xp_gain(10)
   end
 
   def upgrade_defense
     @defense_built = DefenseBuilt.order(updated_at: :desc).first
     upgraded_defense = Defense.find_by(name: @defense_built.defense.name, level: @defense_built.defense.level + 1)
     @defense_built.update({ defense_id: upgraded_defense.id })
+    flash[:notice] = current_user.xp_gain(10)
   end
 end

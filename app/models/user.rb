@@ -14,4 +14,15 @@ class User < ApplicationRecord
   def set_energy_updated_at
     self.update(energy_updated_at: 0.minutes.from_now)
   end
+
+  def xp_gain(xp)
+    xp_needed = self.level * 20 + 80
+    if self.experience + xp >= xp_needed
+      self.update(level: self.level + 1, experience: self.experience + xp - xp_needed, energy: self.energy + 50)
+      return "Level up! - Energy + 50"
+    else
+      self.update(experience: self.experience + xp)
+      return "Experience + #{xp}"
+    end
+  end
 end

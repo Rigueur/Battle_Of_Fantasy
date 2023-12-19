@@ -11,7 +11,7 @@
 
 #energy-bar {
   width: 95%;
-  height: 70%;
+  aspect-ratio: 1300/300;
   background-size: cover;
 }
 
@@ -19,5 +19,16 @@
   width: 95%;
   height: 70%;
   background-color: rgba(217, 199, 189, 0.7);
-  border-radius: 10px;
+  border-radius: 3px;
+}
+
+.progress {
+  margin: 10px;
+}
+
+.progress-container {
+  height: 41%;
+  aspect-ratio: 1020/125;
+  background-color: rgba(217, 199, 189, 0.0);
+  border-radius: 1px;
 }

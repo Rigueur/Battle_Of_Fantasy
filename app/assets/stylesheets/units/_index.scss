@@ -1,0 +1,139 @@
+.conteneur-bleu {
+  position: relative;
+  left: 6%;
+  top: 5%;
+  width: calc(100vw / 1.15);
+  height: calc(100vw / 2.15);
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper {
+  width: 80%;
+}
+
+
+.swiper-scrollbar {
+  --swiper-scrollbar-bottom: 10%;
+  --swiper-scrollbar-size: 10px;
+  background-color: rgb(217, 199, 189);
+}
+
+.swiper-scrollbar-drag {
+  background: #382C3D;
+}
+
+.unit {
+  position: relative;
+  max-width: 400px;
+  padding: 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--clr-text);
+  background-color: transparent;
+  border-radius: 10px;
+  isolation: isolate;
+}
+
+.unit::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 15px;
+  background: rgba(217, 199, 189, 0.8);
+  backdrop-filter: blur(16px) saturate(120%);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  z-index: -1;
+}
+
+.unit-img {
+  width: 100%;
+  max-width: 400px;
+  object-fit: cover;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  border-radius: 6px;
+  border: 3px solid #382C3D;
+}
+
+.unit-detail {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.unit-infos {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: space-between;
+}
+
+.unit-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 8px;
+  padding: 15px 0;
+  cursor: default;
+}
+
+.unit-name {
+  font-size: 1.4rem;
+  font-family: 'Karma';
+  font-weight: 600;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.unit-author {
+  opacity: 0.6;
+  color: var(--clr-text);
+}
+
+.unit-avatar {
+  width: 40px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.unit-quantity {
+  height: 5vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.unit-label {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  border: solid 3px #382C3D;
+  width: 95%;
+  color: #382C3D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.unit-recruit {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  width: 99%;
+  background-color: #382C3D;
+  border-radius: 15px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
