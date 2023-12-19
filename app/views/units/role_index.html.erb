@@ -1,5 +1,7 @@
+
+<!--
 <div>
-  <h1><%= @role.pluralize.capitalize %></h1>
+  <h1><%= @role.capitalize %></h1>
 
   <div class="row" data-controller="unit" data-unit-role="<%= @role %>" data-unit-count="<%= @units.group_by(&:level).transform_values(&:count).to_json %>">
     <div class="col-md-6">
@@ -21,3 +23,60 @@
     </div>
     <%= link_to 'Back', town_units_path(@town) %>
   </div>
+-->
+
+<div class="conteneur-hidden" data-controller="unit" data-unit-role="<%= @role %>" data-unit-count="<%= @units.group_by(&:level).transform_values(&:count).to_json %>">
+  <div class="unit-card" style="background-image: url('<%= asset_path ('side box.png')%>'); background-size: cover; position: relative;">
+    <div class="unit-details" style="width: 80%; height: 70%; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; position: absolute; top: 10vh;">
+      <div class="unit-pres" style="display: flex; flex-direction: column; justify-content: space-between; height: 49%; align-items:center;">
+        <img src="<%= asset_path (@units.first.image_url) %>" alt="" style="border-radius: 50%; width: 35%;">
+        <h2 style="color: #D9C7BD; font-family: 'Karma';"><%= @role.capitalize %> - Lv. <span data-unit-target="unitlevel"></span></h2>
+      </div>
+      <div class="stats">
+        <p style="margin: 0; color: #D9C7BD"><i class="fa-solid fa-heart" style="color: red"></i> HP </p>
+        <p style="margin: 0; color: #D9C7BD" data-unit-target="hp"></p>
+      </div>
+      <div class="stats">
+        <p style="margin: 0; color: #D9C7BD"><i class="fa-solid fa-shield-halved" style="color: brown"></i> Defense type </p>
+        <p style="margin: 0; color: #D9C7BD" data-unit-target="dtype"></p>
+      </div>
+      <div class="stats">
+        <p style="margin: 0; color: #D9C7BD"><i class="fa-solid fa-burst" style="color: orange"></i> Attack </p>
+        <p style="margin: 0; color: #D9C7BD" data-unit-target="attack"></p>
+      </div>
+      <div class="stats">
+        <p style="margin: 0; color: #D9C7BD"><i class="fa-solid fa-hand-fist" style="color: beige"></i> Attack type </p>
+        <p style="margin: 0; color: #D9C7BD" data-unit-target="atype"></p>
+      </div>
+      <div class="stats">
+        <p style="margin: 0; color: #D9C7BD"><i class="fa-solid fa-person-running" style="color: blue"></i> Speed </p>
+        <p style="margin: 0; color: #D9C7BD" data-unit-target="speed"></p>
+      </div>
+      <div class="stats">
+        <p style="margin: 0; color: #D9C7BD"><i class="fa-solid fa-mask" style="color: purple"></i> Stealth </p>
+        <p style="margin: 0; color: #D9C7BD" data-unit-target="stealth"></p>
+      </div>
+    </div>
+  </div>
+  <div class="unit-card" style="background-image: url('<%= asset_path ('side box.png')%>'); background-size: cover; display: flex; justify-content: center; align-items: center;">
+    <div class="unit-upgrade" style="width: 70%; height: 70%; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center;">
+      <h1 style="color: #D9C7BD; font-family: 'Karma';">Upgrade a level</h1>
+      <%= form_with url: upgrade_town_units_path(role: @role), class:"form-group w-75", method: :post do %>
+      <div class="level-select my-3" style="width: 100%;">
+        <%= label_tag :level, "Select a level", style: "color: #D9C7BD" %>
+        <%= select_tag :level, options_for_select(@units.pluck(:level).uniq.sort, @units.pluck(:level).min), data: { action: "change->unit#updateUpgradeQty", unit_target: "level" }, class: "form-control bg-success" %>
+      </div>
+      <div class="quantity-select" style="width: 100%;">
+        <%= label_tag :quantity, "Select the quantity to upgrade", style: "color: #D9C7BD" %>
+        <%= number_field_tag :quantity, 1, min: 1, class: "form-control bg-success", data: { action: "change->unit#updateUpgradeQty", unit_target: "upgradeQty" } %>
+      </div>
+      <div class="upgrade-cost my-3" style="display:flex; justify-content: space-between; align-items: center; width: 100%;">
+        <p style="color: #D9C7BD">Cost - <span data-unit-target="upgradeCost"></span></p>
+      </div>
+      <div class="upgrade-submit" style="display:flex; flex-direction: column; justify-content: space-evenly; align-items: center; width: 100%;">
+        <%= submit_tag "Upgrade", class: "btn w-100 text-white", style: "background-image: url(#{ asset_path ('button-long.png')}); background-size: cover; background-position: center; height: 10vh; aspect-ratio: 2798/798;" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
