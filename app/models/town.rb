@@ -20,7 +20,7 @@ class Town < ApplicationRecord
   validates :name, :coordinates, :wood_quantity, :stone_quantity, :gold_quantity, :food_quantity, presence: true
   validates :research_ongoing, :construction_ongoing, :defense_ongoing, inclusion: [true, false]
 
-  after_create :set_resources_updated_at, :set_structures, :set_defenses, :set_researches
+  after_create :set_resources_updated_at, :set_structures, :set_defenses, :set_researches, :set_image_url
 
   def set_resources_updated_at
     self.update(resources_updated_at: 0.minutes.from_now)
@@ -41,6 +41,12 @@ class Town < ApplicationRecord
   def set_researches
     Research.where(level: 0).each do |research|
       ResearchLevel.new(research_id: research.id, town_id: self.id).save!
+    end
+  end
+
+  def set_image_url
+    if self.image_url.nil?
+      self.update(image_url: "#{%w[plain desert forest mountain].sample}-base-1.png")
     end
   end
 
