@@ -30,6 +30,9 @@ User.new(username: "Rigueur", password: "123456", email: "rigueur@exemple.com", 
 User.new(username: "Naomi", email: "naomi@exemple.com", nickname: "naomi", level: 3, experience: 15, energy: 35,  password: "pipicaca", avatar_url: "f-knight-2.png").save!
 User.new(username: "Pierre", email: "pierre@exemple.com", nickname: "pierre", level: 2, experience: 10, energy: 20, password: "123456", avatar_url: "m-knight-2.png").save!
 
+puts "Creating chatrooms..."
+Chatroom.new(name: "General").save!
+
 puts "Creating structures..."
 10.times do |index|
   Structure.new(name: "Fields", image_url: "fields-#{index % 3 + 1}.png", level: index, wood_cost: 15 * index, stone_cost: 20 * index, gold_cost: 5 * index, upgrade_time: 2 * index, wood_production: 0, stone_production: 0, gold_production: 0, food_production: 5 * index).save!
