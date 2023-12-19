@@ -1,10 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "qty", "foodCost", "goldCost", "energyCost", "level", "upgradeQty", "upgradeCost", "stats" ]
+  static targets = [ "qty", "foodCost", "goldCost", "energyCost", "level", "upgradeQty", "upgradeCost", "hp", "dtype", "attack", "atype", "speed", "stealth", "unitlevel" ]
 
   connect() {
-    if (this.hasLevelTarget && this.hasUpgradeQtyTarget && this.hasUpgradeCostTarget && this.hasStatsTarget) {
+    if (this.hasLevelTarget && this.hasUpgradeQtyTarget && this.hasUpgradeCostTarget && this.hasHpTarget) {
       this.updateUpgradeQty()
     }
   }
@@ -50,10 +50,16 @@ export default class extends Controller {
     fetch(`/units/upgrade_cost?role=${role}&level=${level}&quantity=${quantity}`)
     .then(response => response.json())
     .then(data => {
-      // Update the cost in the view
-      this.upgradeCostTarget.textContent = `Gold: ${data.cost.gold}, Food: ${data.cost.food}, Energy: ${data.cost.energy}`
+      // Update the cost in the view <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= structure.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= structure.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= structure.gold_cost %></p>
+      this.upgradeCostTarget.innerHTML = `<i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> ${data.cost.gold} <i class="fa-solid fa-burger fa-lg" style="color: beige"></i> ${data.cost.food} <i class="fa-solid fa-bolt fa-lg" style="color: orange"></i> ${data.cost.energy}`
       // Update the stats in the view
-      this.statsTarget.innerHTML = `Hp: ${data.stats.hp}, Armor type: ${data.stats.armor_type}, Attack: ${data.stats.attack}, Attack type: ${data.stats.attack_type}, Speed: ${data.stats.speed}`
+      this.hpTarget.innerHTML = `${data.stats.hp}`
+      this.dtypeTarget.innerHTML = `${data.stats.armor_type}`.charAt(0).toUpperCase() + `${data.stats.armor_type}`.slice(1)
+      this.attackTarget.innerHTML = `${data.stats.attack}`
+      this.atypeTarget.innerHTML = `${data.stats.attack_type}`.charAt(0).toUpperCase() + `${data.stats.attack_type}`.slice(1)
+      this.speedTarget.innerHTML = `${data.stats.speed}`
+      this.stealthTarget.innerHTML = `${data.stats.stealth}`
+      this.unitlevelTarget.innerHTML = `${data.stats.level}`
     })
   }
 }
