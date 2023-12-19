@@ -20,6 +20,7 @@ class BattlesController < ApplicationController
       # Update defending_town's resources before calculating the result
       @battle.defending_town.update_resources
       message = @battle.calculate_and_set_result(attacking_units, @battle.defending_town_id, current_user)
+      @battle.image_url = "battle-scene-#{rand(1..5)}.png"
       if @battle.save
         # Update attacking_town.user.energy
         @battle.attacking_town.user.update(energy: @battle.attacking_town.user.energy - @battle.energy_cost)

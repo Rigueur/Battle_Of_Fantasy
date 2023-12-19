@@ -1,7 +1,7 @@
 
 <div class="conteneur" data-controller="displaymenu" data-action="click->displaymenu#remove">
   <%= image_tag 'logo.png',  alt: "", id: "logo"%>
-  <div class="avatar-icon" style="background-image: url('<%= asset_path ('user-avatar.png') %>'); background-size: cover;">
+  <div class="avatar-icon" style="background-image: url('<%= asset_path (current_user.avatar_url) %>'); background-size: cover;">
     <%= image_tag 'avatar-border.png', alt: "", id: "avatar-border"%>
     <div class="profile-card d-flex flex-column justify-content-end align-items-end">
       <div class="user-infos d-flex flex-column">

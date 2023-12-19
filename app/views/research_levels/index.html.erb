@@ -1,7 +1,7 @@
 <div class="conteneur-bleu" style="background-image: url('<%= asset_path ('box-blue.png')%>'); background-size: cover;">
   <div class="conteneur-grille">
     <% research = @town.researches.find_by(name: "Forge") %>
-	  <div class="boite boite-1" style="--img: url('<%= asset_path ('forge.png')%>');">
+	  <div class="boite boite-1" style="--img: url('<%= asset_path (research.image_url)%>');">
       <div class="details">
         <h2><strong><%= research.name %> - Level <%= research.level %></strong></h2>
         <p><strong>Effect -</strong> <i class="fa-solid fa-wand-magic-sparkles fa-lg" style="color: purple"></i> <%= research.effect %></p>
@@ -13,7 +13,7 @@
       </div>
     </div>
     <% research = @town.researches.find_by(name: "Barracks") %>
-    <div class="boite boite-2" style="--img: url('<%= asset_path ('forge.png')%>');">
+    <div class="boite boite-2" style="--img: url('<%= asset_path (research.image_url)%>');">
       <div class="details">
         <h2><strong><%= research.name %> - Level <%= research.level %></strong></h2>
         <p><strong>Effect -</strong> <i class="fa-solid fa-wand-magic-sparkles fa-lg" style="color: purple"></i> <%= research.effect %></p>
@@ -25,7 +25,7 @@
       </div>
     </div>
     <% research = @town.researches.find_by(name: "Magic Institut") %>
-    <div class="boite boite-3" style="--img: url('<%= asset_path ('forge.png')%>');">
+    <div class="boite boite-3" style="--img: url('<%= asset_path (research.image_url)%>');">
       <div class="details">
         <h2><strong><%= research.name %> - Level <%= research.level %></strong></h2>
         <p><strong>Effect -</strong> <i class="fa-solid fa-wand-magic-sparkles fa-lg" style="color: purple"></i> <%= research.effect %></p>
@@ -37,7 +37,7 @@
       </div>
     </div>
     <% research = @town.researches.find_by(name: "Monster Stable") %>
-    <div class="boite boite-4" style="--img: url('<%= asset_path ('forge.png')%>');">
+    <div class="boite boite-4" style="--img: url('<%= asset_path (research.image_url)%>');">
       <div class="details">
         <h2><strong><%= research.name %> - Level <%= research.level %></strong></h2>
         <p><strong>Effect -</strong> <i class="fa-solid fa-wand-magic-sparkles fa-lg" style="color: purple"></i> <%= research.effect %></p>

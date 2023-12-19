@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_17_214511) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_19_140054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_17_214511) do
     t.text "attacking_units_lost"
     t.text "defending_units_lost"
     t.text "resources_won"
+    t.string "image_url"
     t.index ["attacking_town_id"], name: "index_battles_on_attacking_town_id"
     t.index ["defending_town_id"], name: "index_battles_on_defending_town_id"
   end
