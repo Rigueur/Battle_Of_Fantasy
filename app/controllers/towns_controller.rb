@@ -64,12 +64,12 @@ class TownsController < ApplicationController
     max_energy = 70 + (10 * @user.level.to_i)
     if @user.energy < max_energy
       if @user.update(
-        energy: [current_user.energy + params[:energy].to_i, max_energy].min,
+        energy: [@user.energy + params[:energy].to_i, max_energy].min,
         energy_updated_at: 0.minutes.from_now
       )
         # render partial: 'shared/footer', locals: { town: @town }
       else
-        render json: current_user.errors, status: :unprocessable_entity
+        render json: @user.errors, status: :unprocessable_entity
       end
     else
       if @user.update(
@@ -77,7 +77,7 @@ class TownsController < ApplicationController
       )
         # render partial: 'shared/footer', locals: { town: @town }
       else
-        render json: current_user.errors, status: :unprocessable_entity
+        render json: @user.errors, status: :unprocessable_entity
       end
     end
   end

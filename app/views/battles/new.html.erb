@@ -8,6 +8,9 @@
         <%= radio_button_tag "battle[defending_town_id]", town.id, index.zero?, data: { action: "change->battle#updateEnergyCost" } %>
         <%= town.name %>
         <%= town.user.nickname %>
+        <% if town.last_attacked_at && Time.current - town.last_attacked_at < 5.hours %>
+          <span class="badge bg-danger">Under attack</span>
+        <% end %>
         <br>
       <% end %>
     </div>
