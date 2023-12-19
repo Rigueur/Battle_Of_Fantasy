@@ -23,6 +23,8 @@ Soldier.destroy_all
 Wizard.destroy_all
 Battle.destroy_all
 Town.destroy_all
+Message.destroy_all
+Chatroom.destroy_all
 User.destroy_all
 
 puts "Creating users..."
