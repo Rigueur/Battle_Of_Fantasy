@@ -24,6 +24,9 @@ puts "Creating users..."
 User.new(username: "Rigueur", password: "123456", email: "rigueur@exemple.com", nickname: "Rigueur", level: 5, experience: 50, energy:80).save!
 User.new(username: "Naomi", email: "naomi@exemple.com", nickname: "naomi", level: 3, experience: 15, energy: 35,  password: "pipicaca").save!
 
+puts "Creating chatrooms..."
+Chatroom.new(name: "General").save!
+
 puts "Creating structures..."
 10.times do |index|
   Structure.new(name: "Fields", image_url: "test", level: index, wood_cost: 25 * index, stone_cost: 10 * index, gold_cost: 5 * index, upgrade_time: 1, wood_production: 0, stone_production: 0, gold_production: 0, food_production: 5 * index).save!

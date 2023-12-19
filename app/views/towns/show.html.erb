@@ -84,9 +84,11 @@
 
 
   <div class="icons-menu-right">
-    <div class="facilities-icon">
-      <%= image_tag 'messages-icon.png', alt: "", class: "hover-image" %>
-    </div>
+<%= link_to chatroom_path(@chatroom), class: "text-decoration-none z-1" do %>
+  <div class="facilities-icon">
+    <%= image_tag 'messages-icon.png', alt: "", class: "hover-image" %>
+  </div>
+<% end %>
     <div class="units-icon">
       <%= image_tag 'friends-icon.png', alt: "" %>
     </div>

@@ -2,6 +2,7 @@ class TownsController < ApplicationController
 
   def show
     @town = Town.find_by(user_id: current_user.id)
+    @chatroom = Chatroom.first
   end
 
   def end_construction
