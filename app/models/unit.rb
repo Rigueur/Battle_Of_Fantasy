@@ -37,6 +37,7 @@ class Unit < ApplicationRecord
 
   def save_stats
     self.set_stats
+    self.image_url = "#{self.role}-1.png"
     self.save!
   end
 
