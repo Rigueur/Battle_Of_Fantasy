@@ -53,12 +53,12 @@ export default class extends Controller {
       // Update the cost in the view <i class="fa-solid fa-tree fa-lg" style="color:green"></i> <%= structure.wood_cost %>  <i class="fa-solid fa-gem fa-lg" style="color: grey"></i> <%= structure.stone_cost %> <i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> <%= structure.gold_cost %></p>
       this.upgradeCostTarget.innerHTML = `<i class="fa-solid fa-coins fa-lg" style="color: yellow"></i> ${data.cost.gold} <i class="fa-solid fa-burger fa-lg" style="color: beige"></i> ${data.cost.food} <i class="fa-solid fa-bolt fa-lg" style="color: orange"></i> ${data.cost.energy}`
       // Update the stats in the view
-      this.hpTarget.innerHTML = `${data.stats.hp}`
+      this.hpTarget.innerHTML = `${data.stats.hp}<span style= "color: green; font-weight: bold;"> + ${data.new_stats.hp - data.stats.hp}</span>`
       this.dtypeTarget.innerHTML = `${data.stats.armor_type}`.charAt(0).toUpperCase() + `${data.stats.armor_type}`.slice(1)
-      this.attackTarget.innerHTML = `${data.stats.attack}`
+      this.attackTarget.innerHTML = `${data.stats.attack}<span style= "color: green; font-weight: bold;"> + ${data.new_stats.attack - data.stats.attack}</span>`
       this.atypeTarget.innerHTML = `${data.stats.attack_type}`.charAt(0).toUpperCase() + `${data.stats.attack_type}`.slice(1)
-      this.speedTarget.innerHTML = `${data.stats.speed}`
-      this.stealthTarget.innerHTML = `${data.stats.stealth}`
+      this.speedTarget.innerHTML = `${data.stats.speed}<span style= "color: green; font-weight: bold;"> + ${data.new_stats.speed - data.stats.speed}</span>`
+      this.stealthTarget.innerHTML = `${data.stats.stealth}<span style= "color: green; font-weight: bold;"> + ${data.new_stats.stealth - data.stats.stealth}</span>`
       this.unitlevelTarget.innerHTML = `${data.stats.level}`
     })
   }
