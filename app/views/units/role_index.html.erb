@@ -29,7 +29,7 @@
   <div class="unit-card" style="background-image: url('<%= asset_path ('side box.png')%>'); background-size: cover; position: relative;">
     <div class="unit-details" style="width: 80%; height: 70%; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; position: absolute; top: 10vh;">
       <div class="unit-pres" style="display: flex; flex-direction: column; justify-content: space-between; height: 49%; align-items:center;">
-        <img src="<%= asset_path ('pierre karst.png') %>" alt="" style="border-radius: 50%; width: 35%;">
+        <img src="<%= asset_path (@units.first.image_url) %>" alt="" style="border-radius: 50%; width: 35%;">
         <h2 style="color: #D9C7BD; font-family: 'Karma';"><%= @role.capitalize %> - Lv. <span data-unit-target="unitlevel"></span></h2>
       </div>
       <div class="stats">
