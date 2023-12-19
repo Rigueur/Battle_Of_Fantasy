@@ -19,7 +19,7 @@ class BattlesController < ApplicationController
       redirect_to request.referrer
       # check if defending_town is under protection
     elsif @battle.defending_town.last_attacked_at && Time.current - @battle.defending_town.last_attacked_at < 5.hours
-      flash[:alert] = "This town is currently under protection and cannot be attacked."
+      flash[:alert] = "This town cannot be attacked."
       redirect_to request.referrer
     else
       # Update defending_town's resources before calculating the result

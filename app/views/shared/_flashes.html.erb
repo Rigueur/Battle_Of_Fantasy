@@ -1,12 +1,16 @@
 <% if notice %>
-  <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <div class= "alert btn text-white fade show m-1 p-2 d-flex align-items-center justify-content-center",
+  style= "background-image: url(<%= asset_path ('button-long.png')%>);
+  background-size: cover; background-position: center; height: 10vh; aspect-ratio: 2798/798; border: none;" role="alert">
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close" style="position: absolute; top: 1rem; right: 2rem;"></button>
     <%= notice %>
   </div>
 <% end %>
 <% if alert %>
-  <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <div class= "alert btn text-white fade show m-1 p-2 d-flex align-items-center justify-content-center",
+  style= "background-image: url(<%= asset_path ('button-long.png')%>);
+  background-size: cover; background-position: center; height: 10vh; aspect-ratio: 2798/798; border: none;" role="alert">
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close" style="position: absolute; top: 1rem; right: 2rem;"></button>
     <%= alert %>
   </div>
 <% end %>
