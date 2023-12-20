@@ -1,0 +1,3 @@
+class Spearman < Unit
+
+end

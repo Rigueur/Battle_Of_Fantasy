@@ -1,2 +1,0 @@
-class ArchersController < ApplicationController
-end

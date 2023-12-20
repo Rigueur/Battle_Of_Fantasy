@@ -60,6 +60,7 @@ export default class extends Controller {
       this.speedTarget.innerHTML = `${data.stats.speed}<span style= "color: green; font-weight: bold;"> + ${data.new_stats.speed - data.stats.speed}</span>`
       this.stealthTarget.innerHTML = `${data.stats.stealth}<span style= "color: green; font-weight: bold;"> + ${data.new_stats.stealth - data.stats.stealth}</span>`
       this.unitlevelTarget.innerHTML = `${data.stats.level}`
+      document.getElementById('unit-image').src = data.stats.image_url;
     })
   }
 }
