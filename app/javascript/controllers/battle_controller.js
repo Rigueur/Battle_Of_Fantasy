@@ -12,6 +12,8 @@ export default class extends Controller {
     this.noneButtonTargets.forEach(button => {
       button.addEventListener('click', () => this.updateEnergyCost());
     });
+
+
   }
   updateEnergyCost() {
     var units = {};
@@ -38,7 +40,7 @@ export default class extends Controller {
       if (data.error) {
         alert(data.error);
       } else {
-        this.submitButtonTarget.value = 'Start Battle (Energy cost: ' + data.energy_cost + ')';
+        this.submitButtonTarget.innerText = data.energy_cost;
       }
     });
   }

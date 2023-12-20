@@ -1,3 +1,5 @@
+
+<!--
 <%= form_with(url: town_battles_path, method: :post, data: { controller: "battle" }) do %>
   <%= hidden_field_tag "attacking_town_id", @town.id, data: { battle_target: "attackingTownId" } %>
   <div class="row">
@@ -41,4 +43,97 @@
       <%= submit_tag "Start Battle", class: "btn btn-primary", data: { battle_target: "submitButton" } %>
     </div>
   </div>
+<% end %>
+-->
+
+<%= form_with(url: town_battles_path, method: :post, data: { controller: "battle" }) do %>
+<%= hidden_field_tag "attacking_town_id", @town.id, data: { battle_target: "attackingTownId" } %>
+<div class="conteneur-cache" data-controller="swipervertical">
+  <div class="unit-card" style="background-image: url('<%= asset_path ('side box.png')%>'); background-size: cover; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <h2 style="font-family: 'Karma'" class="text-success">Select a target:</h2>
+    <div class="swiper conteneur-interior" style="width: 70%; height: 60%; display: flex;  justify-content: center; align-items:center;">
+      <div class="town-list swiper-wrapper" style="display: flex; flex-direction: column; align-items: center;">
+        <% Town.all.each_with_index do |town, index| %>
+        <% next if town.user == current_user %>
+        <% if town.last_attacked_at && Time.current - town.last_attacked_at < 5.hours %>
+          <div class="swiper-slide d-flex justify-content-between align-items-center mb-3" style="border-radius: 50px 20px 20px 50px; border: solid 2px grey; width: 80%; position: relative; background-color: grey;">
+            <div style="width: calc(100vw/15); height: calc(100vw/15); background-image: url('<%= asset_path (town.user.avatar_url) %>'); background-size: cover; border-radius: 50%; filter: grayscale(100%) blur(2px);">
+              <img src="<%= asset_path ('round border.png')%>" alt="" style="object-fit: cover; object-position: center; width: 100%; filter: grayscale(100%); ">
+            </div>
+            <div class="user-infos d-flex flex-column me-3 filter: grayscale(100%) blur(2px);">
+              <div class="d-flex flex-row justify-content-between align-items-center h-50">
+                <h2 style="font-size: 1.5em; margin: 0; font-family: 'Mate SC'; filter: blur(2px);"> <%= town.user.nickname %></h2>
+                <h2 style="font-size: 1.2em; margin: 0; font-family: 'Mate SC'; filter: blur(2px);"> Lv. <%= town.user.level %></h2>
+              </div>
+              <div class="d-flex flex-row justify-content-between align-items-center h-50 border-0 filter: grayscale(100%) blur(2px);">
+                <p style="font-size: 1.2em; margin: 0; font-family: 'Karma'; filter: blur(2px);"><i class="fa-solid fa-house" style="color: #244969; filter: grayscale(100%) blur(2px);"></i> <%= town.name %></p>
+                <%= radio_button_tag "battle[defending_town_id]", town.id, index.zero?, data: { action: "change->battle#updateEnergyCost" }, style: "filter: grayscale(100%) blur(2px);"%>
+              </div>
+            </div>
+          <span class="badge bg-danger" style="position: absolute; top: 40%; left: 40%; z-index: 50;">Under attack</span>
+          </div>
+        <% else %>
+        <div class="swiper-slide d-flex justify-content-between align-items-center mb-3" style="border-radius: 50px 20px 20px 50px; width: 80%;">
+          <div style="width: calc(100vw/15); height: calc(100vw/15); background-image: url('<%= asset_path (town.user.avatar_url) %>'); background-size: cover; border-radius: 50%;">
+            <img src="<%= asset_path ('round border.png')%>" alt="" style="object-fit: cover; object-position: center; width: 100%;">
+          </div>
+          <div class="user-infos d-flex flex-column me-3">
+            <div class="d-flex flex-row justify-content-between align-items-center h-50">
+              <h2 style="font-size: 1.5em; margin: 0; font-family: 'Mate SC';"> <%= town.user.nickname %></h2>
+              <h3 style="font-size: 1.2em; margin: 0; font-family: 'Mate SC';"> Lv. <%= town.user.level %></h3>
+            </div>
+            <div class="d-flex flex-row justify-content-between align-items-center h-50 border-0">
+              <p style="font-size: 1.2em; margin: 0; font-family: 'Karma';"><i class="fa-solid fa-house" style="color: #344969;"></i> <%= town.name %></p>
+              <%= radio_button_tag "battle[defending_town_id]", town.id, index.zero?, data: { action: "change->battle#updateEnergyCost" } %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+      </div>
+    <div class="swiper-scrollbar" style="padding: 2px;"></div>
+    </div>
+  </div>
+  <div class="unit-card" style="background-image: url('<%= asset_path ('side box.png')%>'); background-size: cover; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <h2 style="font-family: 'Karma'" class="text-success">Select units:</h2>
+    <div class="swiper conteneur-interior" style="width: 70%; height: 60%; display: flex;  justify-content: center; align-items:center;">
+      <div class="town-list swiper-wrapper" style="display: flex; flex-direction: column; align-items: center;">
+        <% Unit.roles.each do |role| %>
+        <% next unless @town.units.where(role: role).any? %>
+        <% @town.units.where(role: role).pluck(:level).uniq.map(&:to_i).sort.reverse.each do |level| %>
+        <div class="swiper-slide d-flex justify-content-between align-items-center mb-3" style="border-radius: 20px 50px 50px 20px; width: 80%;">
+          <div class="user-infos d-flex justify-content-between align-items-center" style="width: 65%">
+            <div class="d-flex flex-column justify-content-between align-items-left h-75 ms-3">
+              <h2 style="font-size: 1.5em; margin: 0; font-family: 'Mate SC';"> <%= role.pluralize.capitalize %></h2>
+              <h3 style="font-size: 1.2em; margin: 0; font-family: 'Mate SC';"> Level <%= level %> </h3>
+            </div>
+            <div class="d-flex flex-column justify-content-between align-items-center border-0 ms-3">
+              <%= button_tag "Max", type: 'button', style: "font-size: 90%; background-color: transparent; border: 0; border-radius: 3px; color: #382C3D; font-weight: bold;", onclick: "document.getElementById('units_#{role}_#{level}').value = #{@town.units.where(role: role, level: level).count}", data: { battle_target: "maxButton" } %>
+              <%= number_field_tag "units[#{role}][#{level}]", 0, in: 0..@town.units.where(role: role, level: level).count, class: 'form-control bg-success border-0', data: { battle_target: "unit", action: "change->battle#updateEnergyCost" } %>
+              <%= button_tag "Min", type: 'button', style: "font-size: 90%; background-color: transparent; border: 0; border-radius: 3px; color: #382C3D; font-weight: bold;", onclick: "document.getElementById('units_#{role}_#{level}').value = 0", data: { battle_target: "noneButton" } %>
+            </div>
+          </div>
+          <div style="width: calc(100vw/15); height: calc(100vw/15); background-image: url('<%= asset_path (Unit.find_by(role: role, level: level).image_url) %>'); background-size: cover; background-position: center; border-radius: 50%;">
+            <img src="<%= asset_path ('round border.png')%>" alt="" style="object-fit: cover; object-position: center; width: 100%;">
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+      </div>
+    <div class="swiper-scrollbar" style="padding: 2px;"></div>
+    </div>
+  </div>
+  <div class="launch-battle" style="background-image: url('<%= asset_path ('button-long.png') %>'); background-size: cover; background-position: center; z-index: 100">
+    <%= submit_tag "Launch Attack", class: "btn", style: "font-family: 'Mate SC'; color: white; font-size: 2rem; padding: 0;"%>
+    <p style="margin: 0; color: beige;"><i class="fa-solid fa-bolt" style="color: orange"></i> Cost : <span data-battle-target="submitButton"></span></p>
+  </div>
+  <div class="launch-battle" style="background-image: url('<%= asset_path ('button-long.png') %>'); background-size: cover; background-position: center;">
+  </div>
+  <div class="launch-battle" style="background-image: url('<%= asset_path ('button-long.png') %>'); background-size: cover; background-position: center;">
+  </div>
+  <div class="launch-battle" style="background-image: url('<%= asset_path ('button-long.png') %>'); background-size: cover; background-position: center;">
+  </div>
+  <div class="launch-battle" style="background-image: url('<%= asset_path ('button-long.png') %>'); background-size: cover; background-position: center;">
+  </div>
+</div>
 <% end %>
