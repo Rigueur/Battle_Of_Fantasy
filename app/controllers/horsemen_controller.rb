@@ -1,2 +1,0 @@
-class HorsemenController < ApplicationController
-end

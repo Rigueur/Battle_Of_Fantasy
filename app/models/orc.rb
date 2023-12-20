@@ -1,0 +1,3 @@
+class Orc < Unit
+
+end

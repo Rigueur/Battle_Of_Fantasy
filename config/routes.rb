@@ -43,5 +43,9 @@ Rails.application.routes.draw do
 
   get 'units/upgrade_cost', to: 'units#upgrade_cost'
 
-  resources :battles, only: [:show]
+  resources :battles, only: [:show] do
+    member do
+      get :loading
+    end
+  end
 end

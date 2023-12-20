@@ -1,7 +1,7 @@
 <div class="conteneur-bleu" style="background-image: url('<%= asset_path ('box-blue.png')%>'); background-size: cover;" data-controller="swiper">
   <div class="swiper">
     <div class="swiper-wrapper" style="height: fit-content">
-    <% Unit.roles.sort.each do |role| %>
+    <% Unit.roles.sort.select { |role| Unit.new(role: role, level: 1, town_id: @town.id).can_recruit? }.each do |role| %>
       <div class="swiper-slide unit">
         <img
           class="unit-img"
