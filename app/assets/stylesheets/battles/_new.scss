@@ -1,0 +1,31 @@
+.conteneur-cache {
+  position: relative;
+  left: 6%;
+  top: 5%;
+  width: calc(100vw / 1.15);
+  height: calc(100vw / 2.15);
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.launch-battle {
+  position: absolute;
+  top: 39.7vw;
+  left: 26vw;
+  // background-color: #382C3D;
+  // border: 3px solid #D9C7BD;
+  width: calc(100vw/3);
+  height: calc(100vw/14);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
