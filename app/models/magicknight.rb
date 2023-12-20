@@ -1,0 +1,2 @@
+class Magicknight < Unit
+end

@@ -1,0 +1,2 @@
+class Heavyknight < Unit
+end
