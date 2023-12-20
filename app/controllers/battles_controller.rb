@@ -64,7 +64,7 @@ class BattlesController < ApplicationController
 
         flash[:notice] = message
 
-        redirect_to battle_path(@battle)
+        redirect_to loading_battle_path(@battle)
       else
         render :new
       end
@@ -83,6 +83,11 @@ class BattlesController < ApplicationController
     battle = Battle.new(attacking_town: town, defending_town: Town.find(params[:defending_town_id]))
     energy_cost = battle.calculate_and_set_energy_cost(attacking_units)
     render json: { energy_cost: energy_cost }
+  end
+
+  def loading
+    @battle = Battle.find(params[:id])
+    @town = @battle.attacking_town
   end
 
   private
