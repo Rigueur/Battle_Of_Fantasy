@@ -1,9 +1,9 @@
-meta_product_name: “Battle Of Fantasy”
+meta_product_name: "Battle Of Fantasy"
 
-meta_title: “Battle Of Fantasy - Web Browser Fantasy Game”
+meta_title: "Battle Of Fantasy - Web Browser Fantasy Game"
 
-meta_description: “A base building game where you try to develop your base, form an army and invade other player's base”
+meta_description: "A base building game where you try to develop your base, form an army and invade other player's base"
 
-meta_image: “cover.png” # should exist in `app/assets/images/`
+meta_image: "cover.png" # should exist in `app/assets/images/`
 
-twitter_account: “@masabe07” # required for Twitter Cards
+twitter_account: "@masabe07" # required for Twitter Cards
