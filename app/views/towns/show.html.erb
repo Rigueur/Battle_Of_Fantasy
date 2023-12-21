@@ -17,13 +17,13 @@
   </div>
 
 <%= link_to root_path do %>
-  <div class="town-icon">
+  <div class="town-icon" style= "background-image: url('<%= asset_path ('round border.png') %>'); background-size: cover;">
     <%= image_tag 'exit-icon.png' %>
   </div>
 <% end %>
 
   <div class="icons-menu-left">
-    <div class="facilities-icon" data-action="click->displaymenu#display" data-displaymenu-target="icon">
+    <div class="facilities-icon" style= "background-image: url('<%= asset_path ('round border.png') %>'); background-size: cover;" data-action="click->displaymenu#display" data-displaymenu-target="icon">
       <%= image_tag 'facilities-icon.png', alt: "", class: "hover-image"%>
       <div class="facilities-menu d-flex flex-column justify-content-evenly align-items-center" data-displaymenu-target="menu">
         <%= link_to towns_structures_path(@town), class: "text-decoration-none" do %>
@@ -74,12 +74,12 @@
       </div>
     </div>
     <%= link_to town_units_path(@town), class: "text-decoration-none" do %>
-      <div class="units-icon">
+      <div class="units-icon" style= "background-image: url('<%= asset_path ('round border.png') %>'); background-size: cover;">
         <%= image_tag 'units-icon.png', alt: "" %>
       </div>
     <% end %>
     <%= link_to new_town_battle_path(@town), class: "text-decoration-none z-1" do %>
-      <div class="battle-icon">
+      <div class="battle-icon" style= "background-image: url('<%= asset_path ('round border.png') %>'); background-size: cover;">
         <%= image_tag 'battle-icon.png', alt: "" %>
       </div>
     <% end %>
@@ -89,14 +89,14 @@
 
   <div class="icons-menu-right">
 <%= link_to chatroom_path(@chatroom), class: "text-decoration-none z-1" do %>
-  <div class="facilities-icon">
+  <div class="facilities-icon" style= "background-image: url('<%= asset_path ('round border.png') %>'); background-size: cover;">
     <%= image_tag 'messages-icon.png', alt: "", class: "hover-image" %>
   </div>
 <% end %>
-    <div class="units-icon">
+    <div class="units-icon" style= "background-image: url('<%= asset_path ('round border.png') %>'); background-size: cover;">
       <%= image_tag 'friends-icon.png', alt: "" %>
     </div>
-    <div class="battle-icon">
+    <div class="battle-icon" style= "background-image: url('<%= asset_path ('round border.png') %>'); background-size: cover;">
       <%= image_tag 'settings-icon.png', alt: "" %>
     </div>
   </div>

@@ -32,13 +32,21 @@ class BattlesController < ApplicationController
         @battle.attacking_town.user.update(energy: current_user.energy - @battle.energy_cost)
 
         # Update attacking_town.units
-        eval(@battle.attacking_units_lost).each do |(role, level), quantity|
-          @battle.attacking_town.units.where(role: role, level: level).limit(quantity).destroy_all
+        eval(@battle.attacking_units_lost).each do |role_and_level, quantity|
+          role = role_and_level.to_s.scan(/(\w+)/)[0][0]
+          level = role_and_level.to_s.scan(/(\w+)/)[1][0].to_i
+          @battle.attacking_town.units.where(role: role, level: level).limit(quantity).each do |unit|
+            unit.destroy
+          end
         end
 
         # Update defending_town.units
-        eval(@battle.defending_units_lost).each do |(role, level), quantity|
-          @battle.defending_town.units.where(role: role, level: level).limit(quantity).destroy_all
+        eval(@battle.defending_units_lost).each do |role_and_level, quantity|
+          role = role_and_level.to_s.scan(/\w+/)[0][0]
+          level = role_and_level.to_s.scan(/\w+/)[1][0].to_i
+          @battle.defending_town.units.where(role: role, level: level).limit(quantity).each do |unit|
+            unit.destroy
+          end
         end
 
         resources_won = JSON.parse(@battle.resources_won)
