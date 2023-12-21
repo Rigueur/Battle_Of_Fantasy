@@ -35,23 +35,23 @@ puts "Creating researches..."
   Research.new(name: "Forge", image_url: "forge-#{index % 4 + 1}.png", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "Recruit and train armored units").save!
   Research.new(name: "Barracks", image_url: "barracks-#{index % 3 + 1}.png", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "Recruit and train units").save!
   Research.new(name: "Magic Institut", image_url: "magic-institut-#{index % 4 + 1}.png", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "Recruit and train magic units").save!
-  Research.new(name: "Monster Stable", image_url: "magic-institut-1.png", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "Recruit and train monsters").save!
+  Research.new(name: "Monster Stable", image_url: "monster-stable-#{index % 2 + 1}.png", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "Recruit and train monsters").save!
 end
 index = 0
 
 puts "Creating defenses..."
 10.times do |index|
   Defense.new(name: "Walls", image_url: "walls-#{index % 2 + 1}.png", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "nothing").save!
-  Defense.new(name: "Traps", image_url: "watchtower-1.png", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "nothing").save!
+  Defense.new(name: "Traps", image_url: "traps-#{index % 2 + 1}.png", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "nothing").save!
   Defense.new(name: "Watchtower", image_url: "watchtower-#{index % 3 + 1}.png", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "nothing").save!
   Defense.new(name: "Magic Barrier", image_url: "magic-barrier-1.png", level: index, wood_cost: 25, stone_cost: 10, gold_cost: 5, upgrade_time: 1, effect: "nothing").save!
 end
 index = 0
 
 puts "Creating towns..."
-Town.new(user_id: User.find_by(username: "Rigueur").id, name: "Agrabah", coordinates: "1,1", image_url: "desert-base-2.png", wood_quantity: 500, stone_quantity: 500, gold_quantity: 500, food_quantity: 500, research_ongoing: false, construction_ongoing: false, defense_ongoing: false).save!
+Town.new(user_id: User.find_by(username: "Rigueur").id, name: "Agrabah", coordinates: "1,1", image_url: "desert-base-2.png", wood_quantity: 630, stone_quantity: 850, gold_quantity: 720, food_quantity: 430, research_ongoing: false, construction_ongoing: false, defense_ongoing: false).save!
 Town.new(user_id: User.find_by(username: "Naomi").id, name: "Far Far Away", coordinates: "1,1", image_url: "forest-base-2.png", wood_quantity: 100, stone_quantity: 100, gold_quantity: 100, food_quantity: 100, research_ongoing: false, construction_ongoing: false, defense_ongoing: false).save!
-Town.new(user_id: User.find_by(username: "Pierre").id, name: "Biot", coordinates: "1,1", image_url: "plain-base-2.png", wood_quantity: 2500, stone_quantity: 2500, gold_quantity: 2500, food_quantity: 2500, research_ongoing: false, construction_ongoing: false, defense_ongoing: false).save!
+Town.new(user_id: User.find_by(username: "Pierre").id, name: "Biot", coordinates: "1,1", image_url: "plain-base-2.png", wood_quantity: 2540, stone_quantity: 2850, gold_quantity: 2100, food_quantity: 4500, research_ongoing: false, construction_ongoing: false, defense_ongoing: false).save!
 
 puts "Cleaning structure_builts..."
 StructureBuilt.where(town_id: Town.find_by(name: "Agrabah").id).destroy_all
@@ -66,19 +66,19 @@ puts "Cleaning research_levels..."
 ResearchLevel.where(town_id: Town.find_by(name: "Agrabah").id).destroy_all
 
 puts "Creating research_levels..."
-ResearchLevel.new(town_id: Town.find_by(name: "Agrabah").id, research_id: Research.find_by(name: "Forge", level: 5).id).save!
+ResearchLevel.new(town_id: Town.find_by(name: "Agrabah").id, research_id: Research.find_by(name: "Forge", level: 6).id).save!
 ResearchLevel.new(town_id: Town.find_by(name: "Agrabah").id, research_id: Research.find_by(name: "Barracks", level: 7).id).save!
 ResearchLevel.new(town_id: Town.find_by(name: "Agrabah").id, research_id: Research.find_by(name: "Magic Institut", level: 4).id).save!
-ResearchLevel.new(town_id: Town.find_by(name: "Agrabah").id, research_id: Research.find_by(name: "Monster Stable", level: 8).id).save!
+ResearchLevel.new(town_id: Town.find_by(name: "Agrabah").id, research_id: Research.find_by(name: "Monster Stable", level: 5).id).save!
 
 puts "Cleaning defense_builts..."
 DefenseBuilt.where(town_id: Town.find_by(name: "Agrabah").id).destroy_all
 
 puts "Creating defense_builts..."
-DefenseBuilt.new(town_id: Town.find_by(name: "Agrabah").id, defense_id: Defense.find_by(name: "Walls", level: 5).id).save!
-DefenseBuilt.new(town_id: Town.find_by(name: "Agrabah").id, defense_id: Defense.find_by(name: "Traps", level: 7).id).save!
+DefenseBuilt.new(town_id: Town.find_by(name: "Agrabah").id, defense_id: Defense.find_by(name: "Walls", level: 6).id).save!
+DefenseBuilt.new(town_id: Town.find_by(name: "Agrabah").id, defense_id: Defense.find_by(name: "Traps", level: 4).id).save!
 DefenseBuilt.new(town_id: Town.find_by(name: "Agrabah").id, defense_id: Defense.find_by(name: "Watchtower", level: 4).id).save!
-DefenseBuilt.new(town_id: Town.find_by(name: "Agrabah").id, defense_id: Defense.find_by(name: "Magic Barrier", level: 8).id).save!
+DefenseBuilt.new(town_id: Town.find_by(name: "Agrabah").id, defense_id: Defense.find_by(name: "Magic Barrier", level: 5).id).save!
 
 puts "Creating units..."
 25.times do
@@ -88,7 +88,9 @@ end
   Archer.new(town_id:Town.find_by(name: "Far Far Away").id, level: 1).save!
 end
 
-Mage.new(town_id:Town.find_by(name: "Agrabah").id, level: 1).save!
+30.times do
+  Mage.new(town_id:Town.find_by(name: "Agrabah").id, level: 1).save!
+end
 
 Horseman.new(town_id:Town.find_by(name: "Agrabah").id, level: 1).save!
 

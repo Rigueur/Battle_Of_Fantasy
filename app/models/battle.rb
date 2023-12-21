@@ -90,7 +90,6 @@ class Battle < ApplicationRecord
     attacking_units_lost = attacking_units.sort_by { |unit| [unit.level, unit.hp, unit.attack] }.group_by { |unit| [unit.role, unit.level] }.transform_values do |units|
       (units.size * attacking_units_hp_lost_percentage).round
     end
-
     defending_units_lost = defending_units.sort_by { |unit| [unit.level, unit.hp, unit.attack] }.group_by { |unit| [unit.role, unit.level] }.transform_values do |units|
       (units.size * defending_units_hp_lost_percentage).round
     end

@@ -96,6 +96,7 @@ class UnitsController < ApplicationController
         # Update the units' stats
         units.each do |unit|
           unit.level = new_level
+          unit.set_stats
           unit.save!
         end
 
