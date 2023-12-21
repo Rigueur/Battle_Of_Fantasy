@@ -1,45 +1,3 @@
-<!-- FILEPATH: /home/steven/code/Rigueur/Battle_Of_Fantasy/app/views/battles/battle_result.html.erb -->
-
-<!--
-
-<h1>Battle Result</h1>
-
-<p>Attacking Town: <%= @battle.attacking_town.name %></p>
-<p>Attacking User: <%= @battle.attacking_town.user.nickname %></p>
-
-<p>Defending Town: <%= @battle.defending_town.name %></p>
-<p>Defending User: <%= @battle.defending_town.user.nickname %></p>
-
-<p>Energy Cost: <%= @battle.energy_cost %></p>
-
-<p>Result: <%= @battle.result %></p>
-
-<p>Attacking Units lost:</p>
-<ul>
-  <% JSON.parse(@battle.attacking_units_lost.gsub('=>', ':')).each do |role, qty| %>
-    <li><%= role %>: <%= qty %></li>
-  <% end %>
-</ul>
-
-<p>Defending Units lost:</p>
-<ul>
-  <% JSON.parse(@battle.defending_units_lost.gsub('=>', ':')).each do |role, units| %>
-    <li><%= role %>: <%= units %></li>
-  <% end %>
-</ul>
-
-<p>Ressources won:</p>
-<ul>
-  <% JSON.parse(@battle.resources_won).each do |resource, quantity| %>
-    <li><%= resource %>: <%= quantity %></li>
-  <% end %>
-</ul>
-
-<%= link_to 'Back', town_path(@town) %>
-
--->
-
-
 <div class="conteneur-bleu" style="background-image: url('<%= asset_path ('box-blue.png')%>'); background-size: cover;" data-controller="battleswiper">
   <div class="conteneur-interieur" style="width: 70%; height: 70%; display: flex; flex-direction: column; justify-content: between; align-items: center;" >
     <% if @battle.result == "Attacking army won" %>
@@ -88,7 +46,7 @@
             <% role = role_and_level.scan(/(\w+)/)[0][0] %>
             <% level = role_and_level.scan(/(\w+)/)[1][0] %>
             <div class="swiper-slide d-flex justify-content-center align-items-center m-0 me-3" style="border-radius: 50px 50px 50px 50px;">
-              <div class="user-infos d-flex justify-content-center align-items-center me-3" style="white-space: nowrap;">
+              <div class="user-infos d-flex flex-column justify-content-center align-items-center me-3" style="white-space: nowrap;">
                 <h5 style="margin: 0; margin-left: 1.5rem; font-family: 'Mate SC'; display: inline block; color: white;"> Lv. <%= level %> </h5>
                 <h5 style="margin: 0; margin-left: 1.5rem; font-family: 'Mate SC'; display: inline block; color: white;"> Qty: <%= qty %> </h5>
               </div>
@@ -110,7 +68,7 @@
 
       <div class="result-box d-flex flex-column justify-content-center align-items-center" style="border-bottom: solid 3px beige; width: 92%; height: 30%;">
         <h2 style="font-family: 'Modern Antiqua'; color: white; font-size: 3rem; margin: 0; text-align: center;"> TACTICAL RETREAT <i class="fa-solid fa-person-running" style="color: orange;"></i> </h2>
-        <p style="text-align: center; color: white; margin: 0;">You and <%= @battle.defending_town.user.nickname.capitalize %><span style="color: orange;">retreated.</span></p>
+        <p style="text-align: center; color: white; margin: 0;">You and <%= @battle.defending_town.user.nickname.capitalize %><span style="color: orange;"> retreated.</span></p>
       </div>
       <div class="units-lost-box d-flex flex-column justify-content-center align-items-center" style="width: 100%; height: 40%;">
         <h4 style="font-family: 'Modern Antiqua'; color: white; margin: 0; margin-bottom: 1rem; margin-top: 1rem; text-align: center;"> Units lost : </h4>
@@ -120,7 +78,7 @@
             <% role = role_and_level.scan(/(\w+)/)[0][0] %>
             <% level = role_and_level.scan(/(\w+)/)[1][0] %>
             <div class="swiper-slide d-flex justify-content-center align-items-center m-0 me-3" style="border-radius: 50px 50px 50px 50px;">
-              <div class="user-infos d-flex justify-content-center align-items-center me-3" style="white-space: nowrap;">
+              <div class="user-infos flex-column d-flex justify-content-center align-items-center me-3" style="white-space: nowrap;">
                 <h5 style="margin: 0; margin-left: 1.5rem; font-family: 'Mate SC'; display: inline block; color: white;"> Lv. <%= level %> </h5>
                 <h5 style="margin: 0; margin-left: 1.5rem; font-family: 'Mate SC'; display: inline block; color: white;"> Qty: <%= qty %> </h5>
               </div>
