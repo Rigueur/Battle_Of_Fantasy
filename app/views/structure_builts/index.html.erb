@@ -1,3 +1,9 @@
+<%= link_to town_path(current_user.towns[0]) do %>
+  <div class="back-button">
+    <img src="<%= asset_path ('back-icon.png')%>" alt="" style="object-fit: cover; object-position: center; width: 80%;">
+  </div>
+<% end %>
+
 <div class="conteneur-bleu" style="background-image: url('<%= asset_path ('box-blue.png')%>'); background-size: cover;">
   <div class="conteneur-grille">
     <% structure = @town.structures.find_by(name: "Sawmill") %>

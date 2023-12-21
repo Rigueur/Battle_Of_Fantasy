@@ -1,3 +1,9 @@
+<%= link_to town_path(current_user.towns[0]) do %>
+  <div class="back-button">
+    <img src="<%= asset_path ('back-icon.png')%>" alt="" style="object-fit: cover; object-position: center; width: 80%;">
+  </div>
+<% end %>
+
 <div class="conteneur-bleu" style="background-image: url('<%= asset_path ('box-blue.png')%>'); background-size: cover;" data-controller="swiper">
   <div class="swiper">
     <div class="swiper-wrapper" style="height: fit-content">
@@ -25,7 +31,7 @@
             <%= t.hidden_field :role, value: role %>
             <%= t.number_field :qty, class:"unit-label text-center bg-success", placeholder: "0", min: 1, data: { action: "unit#updateCost", unit_target: "qty#{role}", role: role }  %>
             <%= t.submit "Recruit", class:"unit-recruit btn btn-primary" %>
-            <a href=<%=role_index_town_units_path(@town, role)%> class= "unit-recruit btn btn-primary">More</a>
+            <a href=<%=role_index_town_units_path(@town, role)%> class= "unit-more btn btn-secondary">More</a>
           </div>
         </div>
       </div>

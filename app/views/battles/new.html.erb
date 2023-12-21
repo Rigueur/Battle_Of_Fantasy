@@ -1,3 +1,9 @@
+<%= link_to town_path(current_user.towns[0]) do %>
+  <div class="back-button">
+    <img src="<%= asset_path ('back-icon.png')%>" alt="" style="object-fit: cover; object-position: center; width: 80%;">
+  </div>
+<% end %>
+
 <%= form_with(url: town_battles_path, method: :post, data: { controller: "battle" }) do %>
 <%= hidden_field_tag "attacking_town_id", @town.id, data: { battle_target: "attackingTownId" } %>
 <div class="conteneur-cache" data-controller="swipervertical">
@@ -55,11 +61,11 @@
         <% @town.units.where(role: role).pluck(:level).uniq.map(&:to_i).sort.reverse.each do |level| %>
         <div class="swiper-slide d-flex justify-content-between align-items-center mb-3" style="border-radius: 20px 50px 50px 20px; width: 80%;">
           <div class="user-infos d-flex justify-content-between align-items-center" style="width: 65%">
-            <div class="d-flex flex-column justify-content-between align-items-left h-75 ms-3">
-              <h2 style="font-size: 1.5em; margin: 0; font-family: 'Mate SC';"> <%= role.pluralize.capitalize %></h2>
-              <h3 style="font-size: 1.2em; margin: 0; font-family: 'Mate SC';"> Level <%= level %> </h3>
+            <div class="d-flex flex-column justify-content-between align-items-left h-75 ms-2">
+              <h2 style="font-size: 120%; margin: 0; font-family: 'Mate SC';"> <%= role.pluralize.capitalize %></h2>
+              <h3 style="font-size: 100%; margin: 0; font-family: 'Mate SC';"> Level <%= level %> </h3>
             </div>
-            <div class="d-flex flex-column justify-content-between align-items-center border-0 ms-3">
+            <div class="d-flex flex-column justify-content-between align-items-center border-0">
               <%= button_tag "Max", type: 'button', style: "font-size: 90%; background-color: transparent; border: 0; border-radius: 3px; color: #382C3D; font-weight: bold;", onclick: "document.getElementById('units_#{role}_#{level}').value = #{@town.units.where(role: role, level: level).count}", data: { battle_target: "maxButton" } %>
               <%= number_field_tag "units[#{role}][#{level}]", 0, in: 0..@town.units.where(role: role, level: level).count, class: 'form-control bg-success border-0', data: { battle_target: "unit", action: "change->battle#updateEnergyCost" } %>
               <%= button_tag "Min", type: 'button', style: "font-size: 90%; background-color: transparent; border: 0; border-radius: 3px; color: #382C3D; font-weight: bold;", onclick: "document.getElementById('units_#{role}_#{level}').value = 0", data: { battle_target: "noneButton" } %>

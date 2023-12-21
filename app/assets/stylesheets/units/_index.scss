@@ -133,12 +133,22 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 3px;
 }
 
 .unit-label {
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   border: solid 3px #382C3D;
+  width: 95%;
+  color: #382C3D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.unit-more {
+  border-radius: 15px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   width: 95%;
   color: #382C3D;
   display: flex;
@@ -149,9 +159,8 @@
 .unit-recruit {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   width: 99%;
-  background-color: #382C3D;
-  border-radius: 15px;
   color: white;
+  border-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
