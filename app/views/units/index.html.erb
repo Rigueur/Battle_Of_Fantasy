@@ -31,7 +31,11 @@
             <%= t.hidden_field :role, value: role %>
             <%= t.number_field :qty, class:"unit-label text-center bg-success", placeholder: "0", min: 1, data: { action: "unit#updateCost", unit_target: "qty#{role}", role: role }  %>
             <%= t.submit "Recruit", class:"unit-recruit btn btn-primary" %>
-            <a href=<%=role_index_town_units_path(@town, role)%> class= "unit-more btn btn-secondary">More</a>
+            <% if instance_variable_get("@#{role.pluralize}").size == 0 %>
+              <a href=<%= town_units_path(@town)%> class= "unit-more btn btn-secondary">More</a>
+            <% else %>
+              <a href=<%=role_index_town_units_path(@town, role)%> class= "unit-more btn btn-secondary">More</a>
+            <% end %>
           </div>
         </div>
       </div>
