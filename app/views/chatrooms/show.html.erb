@@ -1,3 +1,9 @@
+<%= link_to town_path(current_user.towns[0]) do %>
+  <div class="back-button">
+    <img src="<%= asset_path ('back-icon.png')%>" alt="" style="object-fit: cover; object-position: center; width: 80%;">
+  </div>
+<% end %>
+
 <div>
   <%= link_to town_path(@city), class: "logo-link" do %>
     <%= image_tag 'logo.png', alt: "", id: "logo" %>
