@@ -1,6 +1,9 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<%= link_to "Log in", new_user_session_path %>
-<li><a class="" href="<%= destroy_user_session_path %>" data-turbo-method="delete">Log out</a></li>
-<%= link_to "Town",  current_user ? current_user.towns[0] : "#" %>
-<%= link_to "Profile",  current_user ? user_profile_path(current_user.username) : "#" %>
+<div class="d-flex align-items-center m-auto" style="flex-direction: column; justify-content: space-evenly; width: 40vw; height: 80%">
+    <%= image_tag 'logo.png',  alt: "", style: "width: 50%;"%>
+    <div class="upgrade-submit" style="display:flex; flex-direction: column; justify-content: space-evenly; align-items: center; width: 100%;">
+      <%= link_to "Log in", new_user_session_path, class: "btn text-white d-flex align-items-center justify-content-center", style: "background-image: url(#{ asset_path ('button-long.png')}); background-size: cover; background-position: center; height: 10vh; aspect-ratio: 2798/798;" %>
+      <%= link_to "Sign up", new_user_registration_path, class: "btn text-white d-flex align-items-center justify-content-center", style: "background-image: url(#{ asset_path ('button-long.png')}); background-size: cover; background-position: center; height: 10vh; aspect-ratio: 2798/798;" %>
+      <%= link_to "Town", current_user ? current_user.towns[0] : "#", class: "btn text-white d-flex align-items-center justify-content-center", style: "background-image: url(#{ asset_path ('button-long.png')}); background-size: cover; background-position: center; height: 10vh; aspect-ratio: 2798/798;" %>
+      <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: "delete"}, class: "btn text-white d-flex align-items-center justify-content-center", style: "background-image: url(#{ asset_path ('button-long.png')}); background-size: cover; background-position: center; height: 10vh; aspect-ratio: 2798/798;" %>
+    </div>
+</div>

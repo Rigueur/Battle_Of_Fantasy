@@ -14,8 +14,8 @@
 
 <p>Attacking Units lost:</p>
 <ul>
-  <% JSON.parse(@battle.attacking_units_lost.gsub('=>', ':')).each do |role, units| %>
-    <li><%= role %>: <%= units %></li>
+  <% JSON.parse(@battle.attacking_units_lost.gsub('=>', ':')).each do |role, qty| %>
+    <li><%= role %>: <%= qty %></li>
   <% end %>
 </ul>
 
