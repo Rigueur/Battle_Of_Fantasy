@@ -26,6 +26,14 @@
   background-color:#D9C7BD;
 }
 
+.units-lost-box .swiper-slide {
+  width: fit-content !important;
+  height: fit-content;
+  margin-bottom: 2rem !important ;
+  background: transparent;
+  border: 1px solid #D9C7BD;
+}
+
 .swiper-scrollbar {
   --swiper-scrollbar-bottom: 10%;
   --swiper-scrollbar-size: 10px;
