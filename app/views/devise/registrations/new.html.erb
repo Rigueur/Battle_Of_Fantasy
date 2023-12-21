@@ -1,33 +1,41 @@
-<h2>Sign up</h2>
+<div class="d-flex align-items-center" style="backdrop-filter: blur(5px); width: 100vw; height: 100vh;">
+  <div class="form-signin w-25 m-auto">
+    <h2 style="font-family: 'Mate SC'; color: #382C3D; font-size: 25px; text-align: center">S'inscrire</h2>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.error_notification %>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
+        <div class="form-inputs">
     <%= f.input :username,
+    label: "Username:",
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "username" }%>
     <%= f.input :email,
+    label: "Email:",
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "email" }%>
     <%= f.input :password,
+    label: "Password:",
                 required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password" } %>
     <%= f.input :password_confirmation,
+    label: "Confirm the password:",
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
     <%= f.input :nickname,
+    label: "Nickname:",
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "nickname" }%>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
+        <div class="form-actions">
+          <%= f.button :submit, "Sign up", class: 'btn-primary w-100 py-2 mb-3 mt-2' %>
+        </div>
+      <% end %>
 
-<%= render "devise/shared/links" %>
+      <%= render "devise/shared/links" %>
+  </div>
+</div>
