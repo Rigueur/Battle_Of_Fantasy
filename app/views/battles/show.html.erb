@@ -16,7 +16,7 @@
         <div class="swiper" style="width: 95%;">
           <div class="swiper-wrapper" style="width: 100%;">
           <% JSON.parse(@battle.attacking_units_lost.gsub('=>', ':')).each do |role_and_level, qty| %>
-            <%skip if qty == 0%>
+            <% next if qty == 0 %>
             <% role = role_and_level.scan(/(\w+)/)[0][0] %>
             <% level = role_and_level.scan(/(\w+)/)[1][0] %>
             <div class="swiper-slide d-flex justify-content-center align-items-center m-0 me-3" style="border-radius: 100px;">
@@ -49,7 +49,7 @@
         <div class="swiper" style="width: 95%;">
           <div class="swiper-wrapper" style="width: 100%;">
           <% JSON.parse(@battle.attacking_units_lost.gsub('=>', ':')).each do |role_and_level, qty| %>
-            <%skip if qty == 0%>
+            <% next if qty == 0 %>
             <% role = role_and_level.scan(/(\w+)/)[0][0] %>
             <% level = role_and_level.scan(/(\w+)/)[1][0] %>
             <div class="swiper-slide d-flex justify-content-center align-items-center m-0 me-3" style="border-radius: 100px">
@@ -82,7 +82,7 @@
         <div class="swiper" style="width: 95%;">
           <div class="swiper-wrapper" style="width: 100%;">
           <% JSON.parse(@battle.attacking_units_lost.gsub('=>', ':')).each do |role_and_level, qty| %>
-            <%skip if qty == 0%>
+            <% next if qty == 0 %>
             <% role = role_and_level.scan(/(\w+)/)[0][0] %>
             <% level = role_and_level.scan(/(\w+)/)[1][0] %>
             <div class="swiper-slide d-flex justify-content-center align-items-center m-0 me-3" style="border-radius: 100px;">
