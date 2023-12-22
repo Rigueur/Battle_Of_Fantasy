@@ -95,6 +95,7 @@ end
 30.times do
   Archer.new(town_id:Town.find_by(name: "Sherwood").id, level: 1).save!
 end
+Archer.new(town_id:Town.find_by(name: "Startway").id, level: 1).save!
 
 20.times do
   Mage.new(town_id:Town.find_by(name: "Agrabah").id, level: 1).save!
@@ -102,10 +103,12 @@ end
 10.times do
   Mage.new(town_id:Town.find_by(name: "Sherwood").id, level: 1).save!
 end
+Mage.new(town_id:Town.find_by(name: "Startway").id, level: 1).save!
 
 12.times do
   Horseman.new(town_id:Town.find_by(name: "Agrabah").id, level: 1).save!
 end
+Horseman.new(town_id:Town.find_by(name: "Startway").id, level: 1).save!
 
 10.times do
   Soldier.new(town_id:Town.find_by(name: "Agrabah").id, level: 1).save!
@@ -114,10 +117,12 @@ end
 5.times do
   Soldier.new(town_id:Town.find_by(name: "Sherwood").id, level: 1).save!
 end
+Soldier.new(town_id:Town.find_by(name: "Startway").id, level: 1).save!
 
 8.times do
   Wizard.new(town_id:Town.find_by(name: "Agrabah").id, level: 1).save!
 end
+Wizard.new(town_id:Town.find_by(name: "Startway").id, level: 1).save!
 
 9.times do
   Knight.new(town_id:Town.find_by(name: "Agrabah").id, level: 1).save!
@@ -127,6 +132,8 @@ end
     Spearman.new(town_id:Town.find_by(name: "Kaamelott").id, level: 1).save!
   end
 end
+Knight.new(town_id:Town.find_by(name: "Startway").id, level: 2).save!
+Spearman.new(town_id:Town.find_by(name: "Startway").id, level: 2).save!
 
 3.times do
   Heavyknight.new(town_id:Town.find_by(name: "Agrabah").id, level: 1).save!
@@ -135,12 +142,14 @@ Heavyknight.new(town_id:Town.find_by(name: "Agrabah").id, level: 2).save!
 8.times do
   Heavyknight.new(town_id:Town.find_by(name: "Kaamelott").id, level: 1).save!
 end
+Heavyknight.new(town_id:Town.find_by(name: "Startway").id, level: 1).save!
 
 5.times do
   Magicknight.new(town_id:Town.find_by(name: "Agrabah").id, level: 1).save!
   Magicknight.new(town_id:Town.find_by(name: "Kaamelott").id, level: 2).save!
 end
 Magicknight.new(town_id:Town.find_by(name: "Agrabah").id, level: 2).save!
+Magicknight.new(town_id:Town.find_by(name: "Startway").id, level: 1).save!
 
 2.times do
   Orc.new(town_id:Town.find_by(name: "Agrabah").id, level: 1).save!
@@ -148,8 +157,9 @@ end
 9.times do
   Orc.new(town_id:Town.find_by(name: "Kaamelott").id, level: 1).save!
 end
+Orc.new(town_id:Town.find_by(name: "Startway").id, level: 1).save!
 
-Dragon.new(town_id:Town.find_by(name: "Agrabah").id, level: 1).save!
+Dragon.new(town_id:Town.find_by(name: "Startway").id, level: 1).save!
 4.times do
   Dragon.new(town_id:Town.find_by(name: "Kaamelott").id, level: 2).save!
 end
